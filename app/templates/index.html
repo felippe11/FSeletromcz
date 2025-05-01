@@ -115,8 +115,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <div class="flex items-center">
-                        <i class="fas fa-bolt text-blue-500 text-3xl mr-2"></i>
-                        <span class="text-xl font-bold text-gray-800">FS <span class="text-blue-500">Eletromcz</span></span>
+                        <img src="static/img/logo.png" alt="FS Eletromcz Logo" class="h-12 mr-2">
                     </div>
                 </div>
                 
@@ -253,10 +252,26 @@
                     </div>
                 </div>
                 
-                <div class="lg:w-1/2 relative slide-right" style="animation-delay: 0.3s;">
-                    <div class="bg-blue-500 rounded-xl w-full h-80 md:h-96 overflow-hidden shadow-xl">
-                        <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Profissional da FS Eletromcz" class="w-full h-full object-cover">
+                <div class="lg:w-1/2 relative fade-in slide-right" style="animation-delay: 0.3s;">
+                    <div class="grid grid-cols-2 gap-4 h-50">
+                        <!-- Imagem maior (ocupa toda a altura da coluna direita) -->
+                        <div class="col-span-1 h-full">
+                            <div class="bg-blue-500 rounded-xl overflow-hidden shadow-xl h-full">
+                                <img src="static/img/sua_foto1.jpg" alt="Equipe FS Eletromcz" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        
+                        <!-- Duas imagens menores empilhadas -->
+                        <div class="col-span-1 grid grid-rows-2 gap-4">
+                            <div class="bg-blue-500 rounded-xl overflow-hidden shadow-xl">
+                                <img src="static/img/sua_foto2.jpg" alt="Serviço FS Eletromcz" class="w-full h-full object-cover">
+                            </div>
+                            <div class="bg-blue-500 rounded-xl overflow-hidden shadow-xl">
+                                <img src="static/img/sua_foto3.jpg" alt="Projeto FS Eletromcz" class="w-full h-full object-cover">
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg w-3/4 hidden md:block">
                         <div class="flex items-center">
                             <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
