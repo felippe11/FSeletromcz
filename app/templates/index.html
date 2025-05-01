@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FS Eletromcz - Soluções Elétricas Profissionais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1559302994-c5faba5f9c4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .slide-right {
+            animation: slideRight 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideRight {
+            from { 
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navbar -->
+    <header class="fixed w-full z-50 bg-white shadow-md">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex items-center">
+                        <i class="fas fa-bolt text-blue-500 text-3xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">FS <span class="text-blue-500">Eletromcz</span></span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-500">Início</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-blue-500">Serviços</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-blue-500">Sobre</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-500">Contato</a>
+                    <a href="https://wa.me/5511987654321" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i> Orçamento
+                    </a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-20">
+        <div class="container mx-auto px-6 text-center fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-up">Soluções Elétricas <span class="text-blue-400">Profissionais</span></h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto slide-up" style="animation-delay: 0.2s;">Instalações, manutenções e projetos elétricos com qualidade e segurança para sua residência ou empresa.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 slide-up" style="animation-delay: 0.4s;">
+                <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300">Fale Conosco</a>
+                <a href="#services" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300">Nossos Serviços</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos <span class="text-blue-500">Serviços</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Oferecemos soluções completas em elétrica residencial, predial e industrial com profissionais qualificados e materiais de primeira linha.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-home text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Elétrica Residencial</h3>
+                    <p class="text-gray-600 text-center">Instalação e manutenção elétrica para residências, incluindo quadros de distribuição, tomadas, interruptores e iluminação.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-building text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Elétrica Predial</h3>
+                    <p class="text-gray-600 text-center">Soluções elétricas para edifícios comerciais e residenciais, incluindo sistemas de energia de emergência e automação.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.6s;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-industry text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Elétrica Industrial</h3>
+                    <p class="text-gray-600 text-center">Instalações industriais, painéis elétricos, comandos elétricos, CLP e sistemas de automação industrial.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.8s;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-solar-panel text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Energia Solar</h3>
+                    <p class="text-gray-600 text-center">Projetos e instalação de sistemas de energia solar fotovoltaica para residências e empresas.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 1s;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-tools text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Manutenção Elétrica</h3>
+                    <p class="text-gray-600 text-center">Manutenção preventiva e corretiva em instalações elétricas, identificação e correção de falhas.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 1.2s;">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Projetos Elétricos</h3>
+                    <p class="text-gray-600 text-center">Elaboração de projetos elétricos conforme normas técnicas, ART e laudos técnicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Sobre a <span class="text-blue-500">FS Eletromcz</span></h2>
+                    <p class="text-gray-600 mb-6">Com mais de 10 anos de experiência no mercado, a FS Eletromcz se destaca pela qualidade dos serviços prestados e compromisso com a segurança e satisfação dos clientes.</p>
+                    <p class="text-gray-600 mb-6">Nossa equipe é composta por profissionais qualificados e certificados, sempre atualizados com as normas técnicas e melhores práticas do setor elétrico.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                            <span class="text-gray-700">Profissionais certificados e experientes</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                            <span class="text-gray-700">Materiais de primeira qualidade</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                            <span class="text-gray-700">Garantia em todos os serviços</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-check text-blue-500"></i>
+                            </div>
+                            <span class="text-gray-700">Atendimento personalizado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 relative slide-right" style="animation-delay: 0.3s;">
+                    <div class="bg-blue-500 rounded-xl w-full h-80 md:h-96 overflow-hidden shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Profissional da FS Eletromcz" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg w-3/4 hidden md:block">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-award text-blue-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Excelência em Serviços</h4>
+                                <p class="text-gray-600 text-sm">Reconhecida pela qualidade e profissionalismo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">O que dizem nossos <span class="text-blue-500">clientes</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A satisfação dos nossos clientes é nossa maior recompensa.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-md fade-in" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Contratei a FS Eletromcz para reformar toda a parte elétrica da minha casa. Fiquei impressionado com o profissionalismo, organização e qualidade do serviço. Recomendo!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Carlos Silva</h4>
+                            <p class="text-gray-500 text-sm">Residencial - São Paulo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-md fade-in" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Precisávamos de um serviço urgente em nossa loja e a FS Eletromcz nos atendeu rapidamente. O problema foi resolvido com eficiência e o técnico ainda nos orientou sobre prevenção."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ana Paula Oliveira</h4>
+                            <p class="text-gray-500 text-sm">Comercial - Osasco</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-md fade-in" style="animation-delay: 0.6s;">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Instalamos energia solar em nossa empresa com a FS Eletromcz. Desde o projeto até a execução, tudo foi feito com muita competência. Estamos muito satisfeitos com a economia gerada."</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Roberto Santos</h4>
+                            <p class="text-gray-500 text-sm">Industrial - Barueri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-6 text-center fade-in">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Precisa de um eletricista <span class="text-blue-200">confiável</span>?</h2>
+                <p class="text-xl mb-8">Entre em contato agora mesmo e solicite um orçamento sem compromisso.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://wa.me/5511987654321" class="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-full text-lg font-medium transition duration-300 flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-xl"></i> WhatsApp
+                    </a>
+                    <a href="tel:+5511987654321" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone mr-2"></i> Ligar Agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Entre em <span class="text-blue-500">Contato</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Estamos prontos para atender sua necessidade. Preencha o formulário ou utilize nossos outros canais de comunicação.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2 fade-in">
+                    <form class="bg-gray-50 rounded-xl p-8 shadow-md">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Seu nome">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">E-mail</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="seu@email.com">
+                        </div>
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="(11) 98765-4321">
+                        </div>
+                        <div class="mb-6">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Serviço desejado</label>
+                            <select id="service" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Selecione um serviço</option>
+                                <option value="residencial">Elétrica Residencial</option>
+                                <option value="predial">Elétrica Predial</option>
+                                <option value="industrial">Elétrica Industrial</option>
+                                <option value="solar">Energia Solar</option>
+                                <option value="manutencao">Manutenção Elétrica</option>
+                                <option value="projeto">Projeto Elétrico</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Descreva sua necessidade..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Enviar Mensagem</button>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2 fade-in" style="animation-delay: 0.3s;">
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md h-full">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Nossos <span class="text-blue-500">Contatos</span></h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt text-blue-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Endereço</h4>
+                                    <p class="text-gray-600">Rua Exemplo, 123 - Centro<br>São Paulo - SP</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-phone text-blue-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Telefone</h4>
+                                    <p class="text-gray-600">(11) 9876-5432<br>(11) 8765-4321</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-envelope text-blue-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">E-mail</h4>
+                                    <p class="text-gray-600">contato@fseletromcz.com<br>orcamentos@fseletromcz.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-clock text-blue-500 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Horário de Atendimento</h4>
+                                    <p class="text-gray-600">Segunda a Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-bold text-gray-800 mb-4">Redes Sociais</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://wa.me/5511987654321" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="mb-8 md:mb-0 fade-in">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-bolt text-blue-500 text-3xl mr-2"></i>
+                        <span class="text-xl font-bold">FS <span class="text-blue-400">Eletromcz</span></span>
+                    </div>
+                    <p class="text-gray-400">Soluções elétricas completas para residências, comércios e indústrias com qualidade, segurança e garantia.</p>
+                </div>
+                
+                <div class="fade-in" style="animation-delay: 0.2s;">
+                    <h4 class="text-lg font-bold mb-4 text-blue-400">Serviços</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Elétrica Residencial</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Elétrica Predial</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Elétrica Industrial</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Energia Solar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Projetos Elétricos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="fade-in" style="animation-delay: 0.4s;">
+                    <h4 class="text-lg font-bold mb-4 text-blue-400">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Início</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Serviços</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">Sobre</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contato</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="fade-in" style="animation-delay: 0.6s;">
+                    <h4 class="text-lg font-bold mb-4 text-blue-400">Contato</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-400 mr-2"></i>
+                            <span class="text-gray-400">Rua Exemplo, 123 - SP</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-blue-400 mr-2"></i>
+                            <span class="text-gray-400">(11) 9876-5432</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-400 mr-2"></i>
+                            <span class="text-gray-400">contato@fseletromcz.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center fade-in">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 FS Eletromcz. Todos os direitos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/5511987654321" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5511987654321" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg pulse hover:bg-green-600 transition duration-300 z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = 0;
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</html>
