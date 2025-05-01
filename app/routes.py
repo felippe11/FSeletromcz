@@ -33,7 +33,7 @@ def enviar_contato():
         
         msg = Message(
             subject=assunto,
-            recipients=["comercial@fseletromcz.com"],
+            recipients=["andrefelippe10@gmail.com"],
             body=corpo_email
         )
         
