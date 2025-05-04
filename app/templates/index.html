@@ -19,9 +19,18 @@
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1559302994-c5faba5f9c4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img/hero.jpg');
             background-size: cover;
             background-position: center;
+        }
+        
+        /* Media query para dispositivos móveis */
+        @media (max-width: 768px) {
+            .hero {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img/hero_mobile2.png');
+                background-size: cover;
+                background-position: center;
+            }
         }
         
         .fade-in {
@@ -167,7 +176,7 @@
                     <a href="#services" class="nav-link text-gray-700 hover:text-blue-500">Serviços</a>
                     <a href="#about" class="nav-link text-gray-700 hover:text-blue-500">Sobre</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-blue-500">Contato</a>
-                    <a href="https://wa.me/5511987654321" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center">
+                    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center">
                         <i class="fab fa-whatsapp mr-2"></i> Orçamento
                     </a>
                 </div>
@@ -196,13 +205,15 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16 sm:pt-20">
-        <div class="container mx-auto px-4 sm:px-6 text-center fade-in">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 slide-up">Soluções Elétricas <span class="text-blue-400">Profissionais</span></h1>
-            <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-2xl mx-auto slide-up" style="animation-delay: 0.2s;">Instalações, manutenções e projetos elétricos com qualidade e segurança para sua residência ou empresa.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 slide-up" style="animation-delay: 0.4s;">
+        <div class="lg:w-1/2 container mx-auto px-4 sm:px-6 text-center fade-in">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 slide-left">Soluções Elétricas <span class="text-blue-500">Profissionais</span></h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-2xl mx-auto slide-left" style="animation-delay: 0.5s;">Proteja seu negócio e seu lar com nossos estabilizadores, baterias e nobreaks. Oferecemos soluções completas para nobreak em maceió, para garantir que você não fique sem energia no momento mais crucial.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 slide-left" style="animation-delay: 0.8s;">
                 <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300">Fale Conosco</a>
                 <a href="#services" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300 mt-3 sm:mt-0">Nossos Serviços</a>
             </div>
+        </div>
+        <div class="lg:w-1/2 hidden lg:block fade-in">
         </div>
     </section>
 
@@ -288,7 +299,6 @@
                     <p class="sobre_empresa text-gray-600 mb-6">Nossas Soluções:
                         <br>Disponibilizamos uma ampla gama de produtos, incluindo Nobreaks (UPS), Estabilizadores de energia, Retificadores e Baterias para nobreaks, todos projetados para garantir a continuidade e a segurança de suas operações.</p>
                     <p class="sobre_empresa text-gray-600 mb-6">Além disso, a FS Eletro é uma assistência técnica multimarcas autorizada e representante das principais marcas do setor, oferecendo um atendimento especializado e a certeza de que seu Nobreak e outros equipamentos terão o desempenho e a confiabilidade necessários para a sua empresa.</p>
-                    <p class="sobre_empresa text-gray-600 mb-6">Além disso, a FS Eletro é assistência técnica multi marcas, autorizada e representante das principais marcas do setor, assegurando um atendimento especializado e nobreak de alta performance para sua empresa.</p>
                     <div class="space-y-4">
                         <div class="flex items-center slide-left" style="animation-delay: 0.5s;">
                             <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
@@ -410,10 +420,10 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Precisa de um eletricista <span class="text-blue-200">confiável</span>?</h2>
                 <p class="text-xl mb-8">Entre em contato agora mesmo e solicite um orçamento sem compromisso.</p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://wa.me/5511987654321" class="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-full text-lg font-medium transition duration-300 flex items-center justify-center">
+                    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-full text-lg font-medium transition duration-300 flex items-center justify-center">
                         <i class="fab fa-whatsapp mr-2 text-xl"></i> WhatsApp
                     </a>
-                    <a href="tel:+5511987654321" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300 flex items-center justify-center">
+                    <a href="tel:+5582988916657" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300 flex items-center justify-center">
                         <i class="fas fa-phone mr-2"></i> Ligar Agora
                     </a>
                 </div>
@@ -512,16 +522,16 @@
                         <div class="mt-8">
                             <h4 class="font-bold text-gray-800 mb-4">Redes Sociais</h4>
                             <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                <a href="https://www.facebook.com/fselectric1" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                <a href="https://www.instagram.com/fseletromcz/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                <a href="https://www.linkedin.com/company/fs-eletro-sistemas-de-energia-ltda/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="https://wa.me/5511987654321" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
+                                <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             </div>
@@ -540,17 +550,19 @@
                     <div class="flex items-center">
                         <img src="static/img/logo2.png" alt="FS Eletromcz Logo" class="h-10 mb-4 sm:h-12 mr-2">
                     </div>
-                    <p class="text-gray-400">Soluções elétricas completas para residências, comércios e indústrias com qualidade, segurança e garantia.</p>
+                    <p class="text-gray-400">Oferecemos um portfólio completo de soluções em energia, projetado para atender às suas necessidades com excelência, qualidade e confiança.</p>
                 </div>
                 
                 <div class="fade-in" style="animation-delay: 0.2s;">
                     <h4 class="text-lg font-bold mb-4 text-blue-400">Serviços</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Elétrica Residencial</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Elétrica Predial</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Elétrica Industrial</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Energia Solar</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Projetos Elétricos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Aluguel de Nobreak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Baterias para Nobreak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Manutenção em Nobreak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Conserto de Nobreak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Venda de Nobreak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Nobreak UPS</a></li>
+
                     </ul>
                 </div>
                 
@@ -587,16 +599,16 @@
             <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center fade-in">
                 <p class="text-gray-400 mb-4 md:mb-0">© 2023 FS Eletromcz. Todos os direitos reservados.</p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                    <a href="https://www.facebook.com/fselectric1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                    <a href="https://www.instagram.com/fseletromcz/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                    <a href="https://www.linkedin.com/company/fs-eletro-sistemas-de-energia-ltda/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="https://wa.me/5511987654321" class="text-gray-400 hover:text-white transition duration-300">
+                    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -605,76 +617,11 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5511987654321" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg pulse hover:bg-green-600 transition duration-300 z-50">
+    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg pulse hover:bg-green-600 transition duration-300 z-50">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script>
-        // Script para animações baseadas em scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            // Seleciona todos os elementos com classes de animação
-            const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .slide-right, .slide-left');
-            
-            // Configura o Intersection Observer para detectar quando os elementos entram no viewport
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Se o elemento tiver um delay definido, respeitamos este delay
-                        if (entry.target.style.animationDelay) {
-                            // Convertemos o delay definido no CSS para timeout do JavaScript
-                            const delayMatch = entry.target.style.animationDelay.match(/[\d\.]+/);
-                            if (delayMatch) {
-                                const delaySeconds = parseFloat(delayMatch[0]);
-                                setTimeout(() => {
-                                    entry.target.classList.add('animated');
-                                }, delaySeconds * 1000);
-                            }
-                        } else {
-                            // Se não tiver delay, anima imediatamente
-                            entry.target.classList.add('animated');
-                        }
-                        
-                        // Uma vez que o elemento já foi animado ou programado para animar, não precisamos mais observá-lo
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1, // O elemento precisa estar 10% visível antes de iniciar a animação
-                rootMargin: '0px 0px -100px 0px' // Inicia a animação um pouco antes do elemento entrar totalmente na tela
-            });
-            
-            // Começa a observar todos os elementos animados
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Smooth scrolling para links de âncora
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Toggle do menu mobile
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Botão Whatsapp continua com animação constante
-            const whatsappButton = document.querySelector('.fixed.bottom-6.right-6');
-            if (whatsappButton) {
-                whatsappButton.classList.add('pulse');
-            }
-        });
-    </script>
-
+<script src="static/js/animacao-control.js"></script>
 <script src="static/js/google-reviews.js"></script>
 <!-- Swiper JS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
