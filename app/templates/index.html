@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FS Eletromcz - Soluções Elétricas Profissionais</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+{% extends "base.html" %}
 
+{% block title %}FS Eletromcz - Soluções Elétricas Profissionais{% endblock %}
+
+{% block extra_css %}
         .sobre_empresa {
             text-align: justify;
         }
         
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img/hero.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/hero.jpg') }}');
             background-size: cover;
             background-position: center;
         }
@@ -27,7 +16,7 @@
         /* Media query para dispositivos móveis */
         @media (max-width: 768px) {
             .hero {
-                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img/hero_mobile2.png');
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/hero_mobile2.png') }}');
                 background-size: cover;
                 background-position: center;
             }
@@ -80,34 +69,6 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .service-card {
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #3b82f6;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
 
         /* Estilos para o carrossel */
         .swiper {
@@ -157,52 +118,9 @@
             margin-top: 0 !important; /* Remover margem superior completamente */
             transform: translateY(-25px); /* Puxar botão para cima */
         }
+{% endblock %}
 
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Header/Navbar -->
-    <header class="fixed w-full z-50 bg-white shadow-md">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="flex items-center">
-                        <img src="static/img/logo.png" alt="FS Eletromcz Logo" class="h-10 sm:h-12 mr-2">
-                    </div>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link text-gray-700 hover:text-blue-500">Início</a>
-                    <a href="#services" class="nav-link text-gray-700 hover:text-blue-500">Serviços</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-blue-500">Sobre</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-500">Contato</a>
-                    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center">
-                        <i class="fab fa-whatsapp mr-2"></i> Orçamento
-                    </a>
-                </div>
-                
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Menu mobile - inicialmente escondido -->
-            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-2">
-                <div class="flex flex-col space-y-3">
-                    <a href="#home" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Início</a>
-                    <a href="#services" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Serviços</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Sobre</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Contato</a>
-                    <a aria-label="Abrir WhatsApp" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center justify-center">
-                        <i class="fab fa-whatsapp mr-2"></i> Orçamento
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
+{% block content %}
     <!-- Hero Section -->
     <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16 sm:pt-20">
         <div class="lg:w-1/2 container mx-auto px-4 sm:px-6 text-center fade-in">
@@ -231,7 +149,7 @@
         <!-- Service Item 1: Aluguel de Nobreak -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.2s;">
           <div class="relative">
-            <img src="static/img/services-1.png" class="w-full h-64 object-cover" alt="Service Image">
+            <img src="{{ url_for('static', filename='img/services-1.png') }}" class="w-full h-64 object-cover" alt="Service Image">
             <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
               <div class="bg-blue-400 rounded-full p-4 shadow-md">
                 <!-- Icon: UPS Rental -->
@@ -251,7 +169,7 @@
         <!-- Service Item 2: Baterias para Nobreak -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.4s;">
           <div class="relative">
-            <img src="static/img/services-2.png" class="w-full h-64 object-cover" alt="Service Image">
+            <img src="{{ url_for('static', filename='img/services-2.png') }}" class="w-full h-64 object-cover" alt="Service Image">
             <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
               <div class="bg-blue-400 rounded-full p-4 shadow-md">
                 <!-- Icon: Battery -->
@@ -271,7 +189,7 @@
         <!-- Service Item 3: Manutenção em Nobreak -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.6s;">
           <div class="relative">
-            <img src="static/img/services-3.png" class="w-full h-64 object-cover" alt="Service Image">
+            <img src="{{ url_for('static', filename='img/services-3.png') }}" class="w-full h-64 object-cover" alt="Service Image">
             <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
               <div class="bg-blue-400 rounded-full p-4 shadow-md">
                 <!-- Icon: Maintenance/Wrench -->
@@ -292,7 +210,7 @@
         <!-- Service Item 4: Conserto de Nobreak -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.8s;">
           <div class="relative">
-            <img src="static/img/services-4.png" class="w-full h-64 object-cover" alt="Service Image">
+            <img src="{{ url_for('static', filename='img/services-4.png') }}" class="w-full h-64 object-cover" alt="Service Image">
             <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
               <div class="bg-blue-400 rounded-full p-4 shadow-md">
                 <!-- Icon: Repair/Tools -->
@@ -312,7 +230,7 @@
         <!-- Service Item 5: Venda de Nobreak -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 1.0s;">
             <div class="relative">
-              <img src="static/img/services-5.png" class="w-full h-64 object-cover" alt="Service Image">
+              <img src="{{ url_for('static', filename='img/services-5.png') }}" class="w-full h-64 object-cover" alt="Service Image">
               <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
                 <div class="bg-blue-400 rounded-full p-4 shadow-md">
                   <!-- Icon: Shopping Cart -->
@@ -332,7 +250,7 @@
         <!-- Service Item 6: Nobreak UPS -->
         <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 1.2s;">
             <div class="relative">
-              <img src="static/img/services-6.png" class="w-full h-64 object-cover" alt="Service Image">
+              <img src="{{ url_for('static', filename='img/services-6.png') }}" class="w-full h-64 object-cover" alt="Service Image">
               <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
                 <div class="bg-blue-400 rounded-full p-4 shadow-md">
                   <!-- Icon: Power/Electricity -->
@@ -397,17 +315,17 @@
                         <!-- Imagem maior (ocupa toda a altura da coluna direita) -->
                         <div class="col-span-1 h-full">
                             <div class="bg-blue-500 rounded-xl overflow-hidden shadow-xl h-full">
-                                <img src="static/img/sua_foto1.jpg" alt="Equipe FS Eletromcz" class="w-full h-full object-cover">
+                                <img src="{{ url_for('static', filename='img/sua_foto1.jpg') }}" alt="Equipe FS Eletromcz" class="w-full h-full object-cover">
                             </div>
                         </div>
                         
                         <!-- Duas imagens menores empilhadas -->
                         <div class="col-span-1 grid grid-rows-2 gap-4">
                             <div class="bg-blue-500 rounded-xl overflow-hidden shadow-xl">
-                                <img src="static/img/sua_foto2.jpg" alt="Serviço FS Eletromcz" class="w-full h-full object-cover">
+                                <img src="{{ url_for('static', filename='img/sua_foto2.jpg') }}" alt="Serviço FS Eletromcz" class="w-full h-full object-cover">
                             </div>
                             <div class="bg-blue-500 rounded-xl overflow-hidden shadow-xl">
-                                <img src="static/img/sua_foto3.jpg" alt="Projeto FS Eletromcz" class="w-full h-full object-cover">
+                                <img src="{{ url_for('static', filename='img/sua_foto3.jpg') }}" alt="Projeto FS Eletromcz" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
@@ -430,7 +348,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img/stats-bg.jpg');">
+    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/stats-bg.jpg') }}');">
         <div class="container mx-auto px-6 py-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 
@@ -521,7 +439,7 @@
 </section>
 
     <!-- CTA Section -->
-    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img/bg-cta.jpg');">
+    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/bg-cta.jpg') }}');">
         <div class="container mx-auto px-6 text-center fade-in">
             <div class="max-w-3xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Precisa de um eletricista <span class="text-blue-500">confiável</span>?</h2>
@@ -649,85 +567,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4  gap-8">
-                <div class="mb-8 md:mb-0 fade-in">
-                    <div class="flex items-center">
-                        <img src="static/img/logo2.png" alt="FS Eletromcz Logo" class="h-10 mb-4 sm:h-12 mr-2">
-                    </div>
-                    <p class="text-white-400">Oferecemos um portfólio completo de soluções em energia, projetado para atender às suas necessidades com excelência, qualidade e confiança.</p>
-                </div>
-                
-                <div class="fade-in" style="animation-delay: 0.2s;">
-                    <h4 class="text-lg font-bold mb-4 text-blue-300">Serviços</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Aluguel de Nobreak</a></li>
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Baterias para Nobreak</a></li>
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Manutenção em Nobreak</a></li>
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Conserto de Nobreak</a></li>
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Venda de Nobreak</a></li>
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Nobreak UPS</a></li>
 
-                    </ul>
-                </div>
-                
-                <div class="fade-in" style="animation-delay: 0.4s;">
-                    <h4 class="text-lg font-bold mb-4 text-blue-300">Links Úteis</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-white-400 hover:text-white transition duration-300">Início</a></li>
-                        <li><a href="#services" class="text-white-400 hover:text-white transition duration-300">Serviços</a></li>
-                        <li><a href="#about" class="text-white-400 hover:text-white transition duration-300">Sobre</a></li>
-                        <li><a href="#contact" class="text-white-400 hover:text-white transition duration-300">Contato</a></li>
-                        <li><a href="#" class="text-white-400 hover:text-white transition duration-300">Blog</a></li>
-                    </ul>
-                </div>
-                
-                <div class="fade-in" style="animation-delay: 0.6s;">
-                    <h4 class="text-lg font-bold mb-4 text-blue-300">Contato</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-300 mr-2"></i>
-                            <span class="text-white-400">Rua 64, Nº 111-A, Cidade Universitária
-                                CEP: 57073-211, Maceió - AL</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone text-blue-300 mr-2"></i>
-                            <span class="text-white-400">(82) 98891-6657</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope text-blue-300 mr-2"></i>
-                            <span class="text-white-400">comercial@fseletromcz.com</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-center text-white-400 mb-4 md:mb-0">© 2025 Fiber. Todos os direitos reservados.</p>
-                <div class="flex items-center space-x-6">
-                    <a href="https://www.facebook.com/fselectric1" target="_blank" rel="noopener noreferrer" class="text-white-400 hover:text-white transition duration-300">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.instagram.com/fseletromcz/" target="_blank" rel="noopener noreferrer" class="text-white-400 hover:text-white transition duration-300">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/company/fs-eletro-sistemas-de-energia-ltda/" target="_blank" rel="noopener noreferrer" class="text-white-400 hover:text-white transition duration-300">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="text-white-400 hover:text-white transition duration-300">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl shadow-lg pulse hover:bg-green-600 transition duration-300 z-50">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
 <script src="static/js/animacao-control.js"></script>
 <!-- Swiper JS -->
@@ -735,5 +575,4 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <!-- Seu JS personalizado para o carrossel -->
 <script src="static/js/google-reviews-carousel.js"></script>
-</body>
-</html>
+{% endblock %}

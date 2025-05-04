@@ -26,8 +26,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    
-    return render_template('index.html', show_reviews=False)
+    return render_template('index.html', show_reviews=False, active_page='home')
 
 @main.route('/get_google_reviews', methods=['GET'])
 def get_google_reviews():
@@ -146,14 +145,6 @@ def get_google_reviews():
             return response
         
         # Verificando se a requisição foi bem-sucedida
-        if data.get('status') == 'OK':
-            result = data.get('result', {})
-            reviews = result.get('reviews', [])
-            
-            logging.info(f"Encontradas {len(reviews)} avaliações")
-            
-            # Se não houver reviews, registrar aviso
-        # Aqui está a mudança - não limitaremos mais a 3 avaliações:
         if data.get('status') == 'OK':
             result = data.get('result', {})
             reviews = result.get('reviews', [])
@@ -417,3 +408,7 @@ def enviar_contato():
         # Em caso de erro, redirecionar com mensagem de erro
         flash(f'Erro ao enviar mensagem. Por favor, tente novamente.', 'error')
         return redirect(url_for('main.home'))
+
+@main.route('/loja')
+def loja():
+    return render_template('loja.html', active_page='loja')
