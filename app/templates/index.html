@@ -217,77 +217,142 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-12 sm:py-16 md:py-20 bg-white">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="text-center mb-10 sm:mb-16 fade-in">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Nossos <span class="text-blue-500">Serviços</span></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto px-4">Oferecemos soluções completas em elétrica residencial, predial e industrial com profissionais qualificados e materiais de primeira linha.</p>
+<!-- Featured Services Section -->
+<section id="featured-services" class="py-16 bg-white">
+    <!-- Section Title -->
+    <div class="text-center mb-10 sm:mb-16 fade-in">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Nossos <span class="text-blue-500">Serviços</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto px-4">Oferecemos soluções completas em elétrica residencial, predial e industrial com profissionais qualificados e materiais de primeira linha.</p>
+    </div><!-- End Section Title -->
+  
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Service Item 1: Aluguel de Nobreak -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.2s;">
+          <div class="relative">
+            <img src="static/img/services-1.png" class="w-full h-64 object-cover" alt="Service Image">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+              <div class="bg-blue-400 rounded-full p-4 shadow-md">
+                <!-- Icon: UPS Rental -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                <!-- Service 1 -->
-                <div class="service-card bg-gray-50 rounded-xl p-6 sm:p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.2s;">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-home text-blue-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Aluguel de Nobreak</h3>
-                    <p class="text-gray-600 text-center">Precisa de energia confiável para eventos, emergências ou demandas temporárias? Oferecemos aluguel de nobreak de altaqualidade, adequados para empresas,
-                        eventos e residências. Equipamentos modernos, assistência técnica e suporte completo para garantir que você tenha energia quando mais precisar.</p>
+          </div>
+          <div class="p-6 pt-10 text-center">
+            <h3 class="text-xl font-semibold mb-4">Aluguel de Nobreak</h3>
+            <p class="text-gray-600">Precisa de energia confiável para eventos, emergências ou demandas temporárias? Oferecemos aluguel de nobreak de alta qualidade, adequados para empresas,
+                 eventos e residências. Equipamentos modernos, assistência técnica e suporte completo para garantir que você tenha energia quando mais precisar.</p>
+          </div>
+        </div>
+        
+        <!-- Service Item 2: Baterias para Nobreak -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.4s;">
+          <div class="relative">
+            <img src="static/img/services-2.png" class="w-full h-64 object-cover" alt="Service Image">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+              <div class="bg-blue-400 rounded-full p-4 shadow-md">
+                <!-- Icon: Battery -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 6h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h1m8 0V4a1 1 0 00-1-1h-2a1 1 0 00-1 1v2m4 0h-4" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-10 text-center">
+            <h3 class="text-xl font-semibold mb-4">Baterias para Nobreak</h3>
+            <p class="text-gray-600">Evite quedas de energia com baterias de longa duração e alta performance para nobreaks. Trabalhamos com uma ampla gama de modelos e marcas,
+                 garantindo qualidade e eficiência para proteger seus equipamentos e manter suas operações ininterruptas.</p>
+          </div>
+        </div>
+        
+        <!-- Service Item 3: Manutenção em Nobreak -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.6s;">
+          <div class="relative">
+            <img src="static/img/services-3.png" class="w-full h-64 object-cover" alt="Service Image">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+              <div class="bg-blue-400 rounded-full p-4 shadow-md">
+                <!-- Icon: Maintenance/Wrench -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-10 text-center">
+            <h3 class="text-xl font-semibold mb-4">Manutenção em Nobreak</h3>
+            <p class="text-gray-600">Seu nobreak merece cuidados para funcionar com eficiência! Realizamos manutenções preventivas e corretivas, identificando e solucionando problemas antes que eles prejudiquem sua rotina.
+                 Conte com nossa equipe técnica especializada para manter sua fonte de energia sempre confiável.</p>
+          </div>
+        </div>
+
+        <!-- Service Item 4: Conserto de Nobreak -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 0.8s;">
+          <div class="relative">
+            <img src="static/img/services-4.png" class="w-full h-64 object-cover" alt="Service Image">
+            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+              <div class="bg-blue-400 rounded-full p-4 shadow-md">
+                <!-- Icon: Repair/Tools -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-10 text-center">
+            <h3 class="text-xl font-semibold mb-4">Conserto de Nobreak</h3>
+            <p class="text-gray-600">Seu nobreak parou de funcionar? Estamos prontos para resolver! Realizamos reparos rápidos e eficazes, diagnosticando e corrigindo falhas para que seu equipamento volte a operar perfeitamente.
+                Atendimento ágil e peças originais para garantir a melhor performance.</p>
+          </div>
+        </div>
+
+        <!-- Service Item 5: Venda de Nobreak -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 1.0s;">
+            <div class="relative">
+              <img src="static/img/services-5.png" class="w-full h-64 object-cover" alt="Service Image">
+              <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                <div class="bg-blue-400 rounded-full p-4 shadow-md">
+                  <!-- Icon: Shopping Cart -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
                 </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.4s;">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-building text-blue-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Baterias para Nobreak</h3>
-                    <p class="text-gray-600 text-center">Evite quedas de energia com baterias de longa duração e alta performance para nobreaks. Trabalhamos com uma ampla
-                         gama de modelos e marcas, garantindo qualidade e eficiência para proteger seus equipamentos e manter suas operações ininterruptas.</p>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.6s;">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-industry text-blue-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Manutenção em Nobreak</h3>
-                    <p class="text-gray-600 text-center">Seu nobreak merece cuidados para funcionar com eficiência! Realizamos manutenções preventivas e corretivas,
-                         identificando e solucionando problemas antes que eles prejudiquem sua rotina. Conte com nossa equipe técnica especializada para manter sua fonte de energia sempre confiável.</p>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 0.8s;">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-solar-panel text-blue-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Conserto de Nobreak</h3>
-                    <p class="text-gray-600 text-center">Seu nobreak parou de funcionar? Estamos prontos para resolver! Realizamos reparos rápidos e eficazes, diagnosticando e corrigindo falhas
-                         para que seu equipamento volte a operar perfeitamente. Atendimento ágil e peças originais para garantir a melhor performance.</p>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 1s;">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-tools text-blue-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Venda de Nobreak</h3>
-                    <p class="text-gray-600 text-center">Encontre o nobreak ideal para proteger seus equipamentos e garantir energia contínua. Oferecemos uma linha completa de modelos das melhores
-                         marcas, com garantia e suporte técnico especializado. Seja para empresas ou residências, temos a solução perfeita para as suas necessidades.</p>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card bg-gray-50 rounded-xl p-8 shadow-md hover:shadow-xl transition duration-300 fade-in" style="animation-delay: 1.2s;">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                        <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Nobreak UPS</h3>
-                    <p class="text-gray-600 text-center">Os nobreaks UPS (Uninterruptible Power Supply) são a escolha ideal para garantir a proteção e o funcionamento contínuo dos seus dispositivos
-                         em caso de falhas ou oscilações na rede elétrica. Com tecnologia avançada, eles mantêm sua operação segura e estável, seja em residências, escritórios ou grandes empresas</p>
-                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-10 text-center">
+              <h3 class="text-xl font-semibold mb-4">Venda de Nobreak</h3>
+              <p class="text-gray-600">Encontre o nobreak ideal para proteger seus equipamentos e garantir energia contínua. Oferecemos uma linha completa de modelos das melhores marcas, com garantia e suporte técnico especializado.
+                Seja para empresas ou residências, temos a solução perfeita para as suas necessidades.</p>
             </div>
         </div>
-    </section>
+
+        <!-- Service Item 6: Nobreak UPS -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 transition duration-300 fade-in" style="animation-delay: 1.2s;">
+            <div class="relative">
+              <img src="static/img/services-6.png" class="w-full h-64 object-cover" alt="Service Image">
+              <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                <div class="bg-blue-400 rounded-full p-4 shadow-md">
+                  <!-- Icon: Power/Electricity -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 pt-10 text-center">
+              <h3 class="text-xl font-semibold mb-4">Nobreak UPS</h3>
+              <p class="text-gray-600">Os nobreaks UPS (Uninterruptible Power Supply) são a escolha ideal para garantir a proteção e o funcionamento contínuo dos seus dispositivos em caso de falhas ou oscilações na rede elétrica.
+                 Com tecnologia avançada, eles mantêm sua operação segura e estável, seja em residências, escritórios ou grandes empresas.</p>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50">
@@ -587,7 +652,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4  gap-8">
                 <div class="mb-8 md:mb-0 fade-in">
                     <div class="flex items-center">
                         <img src="static/img/logo2.png" alt="FS Eletromcz Logo" class="h-10 mb-4 sm:h-12 mr-2">
@@ -624,7 +689,8 @@
                     <ul class="space-y-2">
                         <li class="flex items-center">
                             <i class="fas fa-map-marker-alt text-blue-300 mr-2"></i>
-                            <span class="text-white-400">Rua Exemplo, 123 - SP</span>
+                            <span class="text-white-400">Rua 64, Nº 111-A, Cidade Universitária
+                                CEP: 57073-211, Maceió - AL</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-phone text-blue-300 mr-2"></i>
@@ -639,7 +705,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-center text-white-400 mb-4 md:mb-0">© 2023 FS Eletromcz. Todos os direitos reservados.</p>
+                <p class="text-center text-white-400 mb-4 md:mb-0">© 2025 Fiber. Todos os direitos reservados.</p>
                 <div class="flex items-center space-x-6">
                     <a href="https://www.facebook.com/fselectric1" target="_blank" rel="noopener noreferrer" class="text-white-400 hover:text-white transition duration-300">
                         <i class="fab fa-facebook-f"></i>
