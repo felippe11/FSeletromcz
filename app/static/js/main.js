@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Fechar menu mobile ao clicar em um link
     setupMobileMenuClose();
+    
+    // Efeito parallax na seção CTA
+    setupParallaxEffect();
 });
 
 // Configuração do menu mobile
@@ -129,6 +132,36 @@ function checkScreenSize() {
         // Ajustes para desktop
         document.querySelectorAll('.desktop-only').forEach(el => {
             el.style.display = 'block';
+        });
+    }
+}
+
+// Efeito parallax na seção CTA
+function setupParallaxEffect() {
+    // Selecionar a seção CTA
+    const ctaSection = document.querySelector('section.bg-cover.bg-fixed');
+    
+    if (ctaSection) {
+        // Adicionar classe para efeito parallax
+        ctaSection.classList.add('bg-parallax');
+        
+        // Criar efeito de movimento suave ao rolar
+        window.addEventListener('scroll', function() {
+            // Calcula a posição relativa para o efeito parallax
+            const scrollPosition = window.pageYOffset;
+            const sectionPosition = ctaSection.offsetTop;
+            const sectionHeight = ctaSection.offsetHeight;
+            
+            // Verificar se a seção está visível na viewport
+            if (scrollPosition + window.innerHeight > sectionPosition && 
+                scrollPosition < sectionPosition + sectionHeight) {
+                
+                // Calcular o deslocamento para o efeito parallax
+                const yPos = (scrollPosition - sectionPosition) * 0.3;
+                
+                // Aplicar transformação suave
+                ctaSection.style.backgroundPosition = `center ${-yPos}px`;
+            }
         });
     }
 }
