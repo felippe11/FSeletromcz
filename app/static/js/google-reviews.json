@@ -1,0 +1,31 @@
+{
+  "success": true,
+  "place_name": "FS Eletromcz",
+  "place_rating": 4.9,
+  "reviews": [
+    {
+      "author_name": "André Felippe",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVWE1Sdb89QczkigfG49jn83EFBZW6McR4am4i0AEylaYY=w36-h36-p-rp-mo-br100",
+      "rating": 5,
+      "text": "Trabalho incrível feito pela FS Eletromcz. Eles restauraram toda a fiação da minha casa antiga com eficiência e atenção aos detalhes. Muito profissionais e preços justos, sem surpresas no orçamento final. Recomendo totalmente.",
+      "time": 1714398283,
+      "relative_time_description": "há 1 mês"
+    },
+    {
+      "author_name": "Marina Costa",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVh-hdxdOgFusqijJnzcgEmrtZULtUG85cAsFYk_syQKA=w36-h36-p-rp-mo-br100",
+      "rating": 5,
+      "text": "Contratei a FS Eletro para a instalação elétrica completa da minha loja e fiquei extremamente satisfeita. O serviço foi entregue no prazo, com excelente qualidade e os técnicos muito educados e prestativos. Resolveram prontamente pequenos imprevistos que surgiram.",
+      "time": 1712690283,
+      "relative_time_description": "há 2 semanas"
+    },
+    {
+      "author_name": "Ricardo Oliveira",
+      "profile_photo_url": "https://lh3.googleusercontent.com/a-/ALV-UjVrlCKjV_nzZFZ1Jnbh2VL5Lnm6vGHnZdGff3pfDkJaMQ=w36-h36-p-rp-mo-br100",
+      "rating": 4,
+      "text": "Excelente empresa para instalação de painéis solares. Muito conhecimento técnico, atendimento rápido desde o primeiro contato até a conclusão do projeto. A economia na conta de luz já é perceptível. Recomendo para quem busca economizar e ter um serviço de qualidade.",
+      "time": 1709702283,
+      "relative_time_description": "há 1 mês"
+    }
+  ]
+}

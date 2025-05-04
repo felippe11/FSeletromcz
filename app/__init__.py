@@ -6,7 +6,7 @@ from config import Config
 mail = Mail()
 
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     
     # Configurações da aplicação
     app.config.from_object(config_class)

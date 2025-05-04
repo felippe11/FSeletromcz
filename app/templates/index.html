@@ -99,6 +99,56 @@
         .nav-link:hover::after {
             width: 100%;
         }
+
+        /* Estilos para o carrossel */
+        .swiper {
+            width: 100%;
+            padding-top: 80px;    /* Aumentado o padding superior */
+            padding-bottom: 50px; /* Reduzido o padding inferior para aproximar o botão */
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            height: auto;         /* Alterado para auto para ajustar ao conteúdo */
+            min-height: 300px;    /* Adicionado min-height para manter proporção */
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            display: flex;        /* Usando flexbox para garantir conteúdo centralizado */
+            flex-direction: column;
+        }
+
+        .swiper-slide-active {
+            transform: scale(1.1);
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada para o card ativo */
+        }
+
+        .testimonial-carousel-container {
+            min-height: 400px;    
+            overflow: visible;    
+            margin-bottom: 0;     /* Removida a margem inferior */
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiper-button-prev:after, .swiper-button-next:after {
+            display: none;
+        }
+
+        /* Estilo para o botão ver mais avaliações */
+        #more-reviews-button {
+            margin-top: 0 !important; /* Remover margem superior completamente */
+            transform: translateY(-25px); /* Puxar botão para cima */
+        }
+
     </style>
 </head>
 <body class="bg-gray-50">
@@ -170,8 +220,9 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-home text-blue-500 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Elétrica Residencial</h3>
-                    <p class="text-gray-600 text-center">Instalação e manutenção elétrica para residências, incluindo quadros de distribuição, tomadas, interruptores e iluminação.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Aluguel de Nobreak</h3>
+                    <p class="text-gray-600 text-center">Precisa de energia confiável para eventos, emergências ou demandas temporárias? Oferecemos aluguel de nobreak de altaqualidade, adequados para empresas,
+                        eventos e residências. Equipamentos modernos, assistência técnica e suporte completo para garantir que você tenha energia quando mais precisar.</p>
                 </div>
                 
                 <!-- Service 2 -->
@@ -179,8 +230,9 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-building text-blue-500 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Elétrica Predial</h3>
-                    <p class="text-gray-600 text-center">Soluções elétricas para edifícios comerciais e residenciais, incluindo sistemas de energia de emergência e automação.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Baterias para Nobreak</h3>
+                    <p class="text-gray-600 text-center">Evite quedas de energia com baterias de longa duração e alta performance para nobreaks. Trabalhamos com uma ampla
+                         gama de modelos e marcas, garantindo qualidade e eficiência para proteger seus equipamentos e manter suas operações ininterruptas.</p>
                 </div>
                 
                 <!-- Service 3 -->
@@ -188,8 +240,9 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-industry text-blue-500 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Elétrica Industrial</h3>
-                    <p class="text-gray-600 text-center">Instalações industriais, painéis elétricos, comandos elétricos, CLP e sistemas de automação industrial.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Manutenção em Nobreak</h3>
+                    <p class="text-gray-600 text-center">Seu nobreak merece cuidados para funcionar com eficiência! Realizamos manutenções preventivas e corretivas,
+                         identificando e solucionando problemas antes que eles prejudiquem sua rotina. Conte com nossa equipe técnica especializada para manter sua fonte de energia sempre confiável.</p>
                 </div>
                 
                 <!-- Service 4 -->
@@ -197,8 +250,9 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-solar-panel text-blue-500 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Energia Solar</h3>
-                    <p class="text-gray-600 text-center">Projetos e instalação de sistemas de energia solar fotovoltaica para residências e empresas.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Conserto de Nobreak</h3>
+                    <p class="text-gray-600 text-center">Seu nobreak parou de funcionar? Estamos prontos para resolver! Realizamos reparos rápidos e eficazes, diagnosticando e corrigindo falhas
+                         para que seu equipamento volte a operar perfeitamente. Atendimento ágil e peças originais para garantir a melhor performance.</p>
                 </div>
                 
                 <!-- Service 5 -->
@@ -206,8 +260,9 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-tools text-blue-500 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Manutenção Elétrica</h3>
-                    <p class="text-gray-600 text-center">Manutenção preventiva e corretiva em instalações elétricas, identificação e correção de falhas.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Venda de Nobreak</h3>
+                    <p class="text-gray-600 text-center">Encontre o nobreak ideal para proteger seus equipamentos e garantir energia contínua. Oferecemos uma linha completa de modelos das melhores
+                         marcas, com garantia e suporte técnico especializado. Seja para empresas ou residências, temos a solução perfeita para as suas necessidades.</p>
                 </div>
                 
                 <!-- Service 6 -->
@@ -215,8 +270,9 @@
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                         <i class="fas fa-lightbulb text-blue-500 text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Projetos Elétricos</h3>
-                    <p class="text-gray-600 text-center">Elaboração de projetos elétricos conforme normas técnicas, ART e laudos técnicos.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">Nobreak UPS</h3>
+                    <p class="text-gray-600 text-center">Os nobreaks UPS (Uninterruptible Power Supply) são a escolha ideal para garantir a proteção e o funcionamento contínuo dos seus dispositivos
+                         em caso de falhas ou oscilações na rede elétrica. Com tecnologia avançada, eles mantêm sua operação segura e estável, seja em residências, escritórios ou grandes empresas</p>
                 </div>
             </div>
         </div>
@@ -298,86 +354,54 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">O que dizem nossos <span class="text-blue-500">clientes</span></h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">A satisfação dos nossos clientes é nossa maior recompensa.</p>
+<!-- Testimonials Section -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-10 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">O que dizem nossos <span class="text-blue-500">clientes</span></h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">A satisfação dos nossos clientes é nossa maior recompensa.</p>
+        </div>
+        
+        <!-- Container para carrossel de depoimentos -->
+        <div class="testimonial-carousel-container relative overflow-visible">
+            <!-- Indicador de carregamento -->
+            <div id="loading-indicator" class="bg-gray-50 rounded-xl p-8 shadow-md fade-in text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fas fa-spinner fa-pulse text-blue-500 text-2xl"></i>
+                </div>
+                <p class="text-gray-600">Carregando depoimentos reais do Google Reviews...</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-gray-50 rounded-xl p-8 shadow-md fade-in" style="animation-delay: 0.2s;">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Contratei a FS Eletromcz para reformar toda a parte elétrica da minha casa. Fiquei impressionado com o profissionalismo, organização e qualidade do serviço. Recomendo!"</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Carlos Silva</h4>
-                            <p class="text-gray-500 text-sm">Residencial - São Paulo</p>
-                        </div>
-                    </div>
+            <!-- Carrossel de depoimentos - inicialmente vazio -->
+            <div id="testimonials-carousel" class="swiper hidden">
+                <div class="swiper-wrapper">
+                    <!-- Slides serão inseridos aqui via JavaScript -->
                 </div>
                 
-                <!-- Testimonial 2 -->
-                <div class="bg-gray-50 rounded-xl p-8 shadow-md fade-in" style="animation-delay: 0.4s;">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Precisávamos de um serviço urgente em nossa loja e a FS Eletromcz nos atendeu rapidamente. O problema foi resolvido com eficiência e o técnico ainda nos orientou sobre prevenção."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Ana Paula Oliveira</h4>
-                            <p class="text-gray-500 text-sm">Comercial - Osasco</p>
-                        </div>
-                    </div>
+                <!-- Controles de navegação -->
+                <div class="absolute z-10 left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between px-3 md:px-10">
+                    <button class="swiper-button-prev shadow-md p-3 rounded-full bg-white text-blue-500 hover:bg-blue-50 transition-all focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="swiper-button-next shadow-md p-3 rounded-full bg-white text-blue-500 hover:bg-blue-50 transition-all focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
                 
-                <!-- Testimonial 3 -->
-                <div class="bg-gray-50 rounded-xl p-8 shadow-md fade-in" style="animation-delay: 0.6s;">
-                    <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Instalamos energia solar em nossa empresa com a FS Eletromcz. Desde o projeto até a execução, tudo foi feito com muita competência. Estamos muito satisfeitos com a economia gerada."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Cliente" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Roberto Santos</h4>
-                            <p class="text-gray-500 text-sm">Industrial - Barueri</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Paginação -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
-    </section>
+        
+        <!-- Botão para ver mais avaliações - ajuste apenas no HTML -->
+        <div id="more-reviews-button" class="text-center mt-4">
+            <a id="google-reviews-link" href="https://search.google.com/local/reviews?placeid=ChIJu4u41KBHAQcRPp7B7Wi6dZo" target="_blank" rel="noopener noreferrer"
+            class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full transition duration-300">
+                <i class="fab fa-google mr-2"></i> Ver mais avaliações no Google
+            </a>
+        </div>
+    </div>
+</section>
 
     <!-- CTA Section -->
     <section class="py-16 bg-blue-600 text-white">
@@ -650,4 +674,12 @@
             }
         });
     </script>
+
+<script src="static/js/google-reviews.js"></script>
+<!-- Swiper JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<!-- Seu JS personalizado para o carrossel -->
+<script src="static/js/google-reviews-carousel.js"></script>
+</body>
 </html>
