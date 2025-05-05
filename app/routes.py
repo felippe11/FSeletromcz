@@ -71,6 +71,24 @@ def save_image(file):
         logging.error(f"Erro ao salvar imagem: {e}")
         return None
 
+# Função auxiliar para excluir imagem antiga
+def delete_image(filename):
+    if not filename:
+        return
+    
+    try:
+        # Caminho completo para o arquivo
+        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        
+        # Verificar se o arquivo existe e excluir
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            logging.info(f"Imagem excluída com sucesso: {filename}")
+        else:
+            logging.warning(f"Imagem não encontrada para exclusão: {filename}")
+    except Exception as e:
+        logging.error(f"Erro ao excluir imagem: {e}")
+
 @main.route('/')
 def home():
     return render_template('index.html', show_reviews=False, active_page='home')
@@ -572,9 +590,16 @@ def edit_product(id):
             
             # Processar upload de nova imagem - apenas se um arquivo for selecionado
             if form.image.data and hasattr(form.image.data, 'filename') and form.image.data.filename:
+                # Guardar a imagem antiga para excluir após o commit
+                old_image = product.image
+                
+                # Upload da nova imagem
                 image_path = save_image(form.image.data)
                 if image_path:
                     product.image = image_path
+                    
+                    # Excluir a imagem antiga após salvar a nova com sucesso
+                    delete_image(old_image)
             
             # Salvar no banco de dados
             db.session.commit()
@@ -599,9 +624,16 @@ def delete_product(id):
     product = Product.query.get_or_404(id)
     
     try:
+        # Guardar referência à imagem antes de excluir o produto
+        image_filename = product.image
+        
         # Remover produto do banco de dados
         db.session.delete(product)
         db.session.commit()
+        
+        # Depois da exclusão bem-sucedida no banco, excluir o arquivo de imagem
+        delete_image(image_filename)
+        
         flash('Produto excluído com sucesso!', 'success')
     except Exception as e:
         db.session.rollback()
