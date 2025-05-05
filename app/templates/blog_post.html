@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - FS Eletromcz{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ post.summary if post.summary else post.content|striptags|truncate(160) }}">
+    {% if post.featured_image %}
+    <meta property="og:image" content="{{ url_for('static', filename='img/products/' + post.featured_image, _external=True) }}">
+    {% endif %}
+    <meta property="og:title" content="{{ post.title }}">
+    <meta property="og:description" content="{{ post.summary if post.summary else post.content|striptags|truncate(160) }}">
+    <meta property="og:url" content="{{ url_for('main.blog_post', slug=post.slug, _external=True) }}">
+    <meta property="og:type" content="article">
+{% endblock %}
+
+{% block content %}
+<article class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto">
+            <!-- Header do post -->
+            <header class="mb-8">
+                <div class="flex items-center text-sm text-gray-500 mb-4">
+                    <span><i class="far fa-calendar-alt mr-1"></i> {{ post.created_at.strftime('%d/%m/%Y') }}</span>
+                    <span class="mx-2">•</span>
+                    <span>{{ post.author.username if post.author else 'Admin' }}</span>
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl font-bold mb-6">{{ post.title }}</h1>
+                
+                {% if post.featured_image %}
+                    <div class="rounded-lg overflow-hidden mb-8">
+                        <img src="{{ url_for('static', filename='img/products/' + post.featured_image) }}" 
+                             class="w-full h-auto" 
+                             alt="{{ post.title }}">
+                    </div>
+                {% endif %}
+            </header>
+            
+            <!-- Conteúdo do post -->
+            <div class="prose prose-lg max-w-none mb-12">
+                {{ post.content|safe }}
+            </div>
+            
+            <!-- Compartilhar -->
+            <div class="border-t pt-6 mb-12">
+                <h3 class="text-lg font-semibold mb-3">Compartilhe:</h3>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url_for('main.blog_post', slug=post.slug, _external=True) }}" 
+                       target="_blank" rel="noopener" 
+                       class="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ url_for('main.blog_post', slug=post.slug, _external=True) }}&text={{ post.title }}" 
+                       target="_blank" rel="noopener" 
+                       class="bg-blue-400 hover:bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text={{ post.title }}%20{{ url_for('main.blog_post', slug=post.slug, _external=True) }}" 
+                       target="_blank" rel="noopener" 
+                       class="bg-green-500 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:?subject={{ post.title }}&body={{ url_for('main.blog_post', slug=post.slug, _external=True) }}" 
+                       class="bg-gray-600 hover:bg-gray-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Posts relacionados -->
+            {% if related_posts %}
+            <div class="border-t pt-10">
+                <h3 class="text-2xl font-bold mb-6">Posts Relacionados</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {% for related in related_posts %}
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:scale-[1.02]">
+                        <a href="{{ url_for('main.blog_post', slug=related.slug) }}">
+                            {% if related.featured_image %}
+                                <img src="{{ url_for('static', filename='img/products/' + related.featured_image) }}" 
+                                     class="w-full h-32 object-cover" 
+                                     alt="{{ related.title }}">
+                            {% else %}
+                                <div class="w-full h-32 bg-gray-200 flex items-center justify-center">
+                                    <i class="fas fa-bolt text-3xl text-gray-400"></i>
+                                </div>
+                            {% endif %}
+                        </a>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-900 hover:text-blue-600 mb-2">
+                                <a href="{{ url_for('main.blog_post', slug=related.slug) }}">
+                                    {{ related.title|truncate(50) }}
+                                </a>
+                            </h4>
+                            <div class="text-xs text-gray-500">
+                                <i class="far fa-calendar-alt mr-1"></i> {{ related.created_at.strftime('%d/%m/%Y') }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Voltar para o blog -->
+            <div class="mt-10">
+                <a href="{{ url_for('main.blog') }}" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" 
+                              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" 
+                              clip-rule="evenodd"></path>
+                    </svg>
+                    Voltar para o blog
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Estilos para o conteúdo formatado pelo editor */
+    .prose img {
+        max-width: 100%;
+        height: auto;
+        margin: 1.5rem 0;
+        border-radius: 0.5rem;
+    }
+    
+    .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+    
+    .prose h1 { font-size: 2rem; }
+    .prose h2 { font-size: 1.75rem; }
+    .prose h3 { font-size: 1.5rem; }
+    .prose h4 { font-size: 1.25rem; }
+    
+    .prose p {
+        margin-bottom: 1.25rem;
+        line-height: 1.8;
+    }
+    
+    .prose ul, .prose ol {
+        margin: 1.5rem 0;
+        padding-left: 2rem;
+    }
+    
+    .prose ul li {
+        list-style-type: disc;
+        margin-bottom: 0.5rem;
+    }
+    
+    .prose ol li {
+        list-style-type: decimal;
+        margin-bottom: 0.5rem;
+    }
+    
+    .prose a {
+        color: #2563eb;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+    
+    .prose a:hover {
+        color: #1e40af;
+    }
+    
+    .prose blockquote {
+        border-left: 4px solid #e5e7eb;
+        padding: 1rem 1.5rem;
+        margin: 1.5rem 0;
+        font-style: italic;
+        background-color: #f9fafb;
+        border-radius: 0.25rem;
+    }
+</style>
+{% endblock %}

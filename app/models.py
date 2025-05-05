@@ -30,3 +30,19 @@ class Product(db.Model):
     
     def __repr__(self):
         return f'<Product {self.name}>'
+
+class BlogPost(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    slug = db.Column(db.String(200), nullable=False, unique=True)
+    content = db.Column(db.Text, nullable=False)
+    summary = db.Column(db.String(300))
+    featured_image = db.Column(db.String(255))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    published = db.Column(db.Boolean, default=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author = db.relationship('User', backref='blog_posts')
+    
+    def __repr__(self):
+        return f'<BlogPost {self.title}>'

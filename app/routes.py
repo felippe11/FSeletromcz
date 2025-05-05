@@ -3,14 +3,15 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 from flask_mail import Message
 from . import mail
-from .models import db, User, Product
-from .forms import LoginForm, ProductForm
+from .models import db, User, Product, BlogPost
+from .forms import LoginForm, ProductForm, BlogPostForm
 import os
 import requests
 import json
 import time
 import logging
 import locale
+import re
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import uuid
@@ -511,6 +512,7 @@ def logout():
 def admin_dashboard():
     # Estatísticas para o dashboard
     product_count = Product.query.count()
+    post_count = BlogPost.query.count()
     latest_product = Product.query.order_by(Product.created_at.desc()).first()
     
     # Incluir o ano atual para o footer
@@ -519,6 +521,7 @@ def admin_dashboard():
     return render_template('admin/dashboard.html', 
                           active_page='dashboard',
                           product_count=product_count,
+                          post_count=post_count,
                           latest_product=latest_product,
                           now=now)
 
@@ -640,3 +643,192 @@ def delete_product(id):
         flash(f'Erro ao excluir produto: {str(e)}', 'error')
     
     return redirect(url_for('main.admin_products'))
+
+# Funções auxiliares para o blog
+def slugify(text):
+    """Converte texto para slug URL amigável"""
+    # Remover caracteres especiais e converter espaços em hífens
+    slug = re.sub(r'[^\w\s-]', '', text.lower())
+    slug = re.sub(r'[\s_-]+', '-', slug)
+    slug = re.sub(r'^-+|-+$', '', slug)
+    return slug
+
+# Rotas para o blog
+@main.route('/blog')
+def blog():
+    page = request.args.get('page', 1, type=int)
+    per_page = 6  # Número de posts por página
+    
+    # Buscar posts publicados, ordenados por data (mais recente primeiro)
+    posts = BlogPost.query.filter_by(published=True)\
+                         .order_by(BlogPost.created_at.desc())\
+                         .paginate(page=page, per_page=per_page, error_out=False)
+    
+    return render_template('blog.html', 
+                          posts=posts, 
+                          active_page='blog')
+
+@main.route('/blog/<string:slug>')
+def blog_post(slug):
+    # Buscar post pelo slug
+    post = BlogPost.query.filter_by(slug=slug, published=True).first_or_404()
+    
+    # Buscar posts relacionados (excluindo o atual)
+    related_posts = BlogPost.query.filter(BlogPost.id != post.id, BlogPost.published == True)\
+                                 .order_by(BlogPost.created_at.desc())\
+                                 .limit(3).all()
+    
+    return render_template('blog_post.html', 
+                          post=post, 
+                          related_posts=related_posts,
+                          active_page='blog')
+
+# Rotas administrativas do blog
+@main.route('/admin/blog')
+@admin_required
+def admin_blog_posts():
+    # Buscar todos os posts do blog
+    posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
+    now = datetime.now()
+    
+    return render_template('admin/blog_posts.html', 
+                          active_page='blog',
+                          posts=posts,
+                          now=now)
+
+@main.route('/admin/blog/new', methods=['GET', 'POST'])
+@admin_required
+def new_blog_post():
+    form = BlogPostForm()
+    
+    if form.validate_on_submit():
+        try:
+            # Gerar slug se não foi fornecido
+            slug = form.slug.data
+            if not slug:
+                slug = slugify(form.title.data)
+            
+            # Verificar se o slug já existe
+            existing_post = BlogPost.query.filter_by(slug=slug).first()
+            if existing_post:
+                flash('Esta URL amigável já está em uso. Por favor, escolha outra.', 'error')
+                return render_template('admin/blog_post_form.html',
+                                      form=form,
+                                      title="Novo Post",
+                                      post=None,
+                                      active_page='blog')
+            
+            # Criar novo post
+            post = BlogPost(
+                title=form.title.data,
+                slug=slug,
+                content=form.content.data,
+                summary=form.summary.data,
+                published=form.published.data,
+                author_id=current_user.id
+            )
+            
+            # Processar upload de imagem
+            if form.featured_image.data:
+                image_path = save_image(form.featured_image.data)
+                if image_path:
+                    post.featured_image = image_path
+            
+            # Salvar no banco de dados
+            db.session.add(post)
+            db.session.commit()
+            
+            flash('Post criado com sucesso!', 'success')
+            return redirect(url_for('main.admin_blog_posts'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erro ao criar post: {str(e)}', 'error')
+    
+    now = datetime.now()
+    return render_template('admin/blog_post_form.html',
+                          form=form,
+                          title="Novo Post",
+                          post=None,
+                          active_page='blog',
+                          now=now)
+
+@main.route('/admin/blog/edit/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def edit_blog_post(id):
+    post = BlogPost.query.get_or_404(id)
+    form = BlogPostForm(obj=post)
+    
+    if form.validate_on_submit():
+        try:
+            # Verificar se o slug foi alterado
+            if form.slug.data != post.slug:
+                # Verificar se o novo slug já existe
+                existing_post = BlogPost.query.filter_by(slug=form.slug.data).first()
+                if existing_post and existing_post.id != post.id:
+                    flash('Esta URL amigável já está em uso. Por favor, escolha outra.', 'error')
+                    return render_template('admin/blog_post_form.html',
+                                          form=form,
+                                          title="Editar Post",
+                                          post=post,
+                                          active_page='blog')
+            
+            # Atualizar dados do post
+            post.title = form.title.data
+            post.slug = form.slug.data
+            post.content = form.content.data
+            post.summary = form.summary.data
+            post.published = form.published.data
+            post.updated_at = datetime.utcnow()
+            
+            # Processar upload de nova imagem
+            if form.featured_image.data and hasattr(form.featured_image.data, 'filename') and form.featured_image.data.filename:
+                # Guardar a imagem antiga para excluir após o commit
+                old_image = post.featured_image
+                
+                # Upload da nova imagem
+                image_path = save_image(form.featured_image.data)
+                if image_path:
+                    post.featured_image = image_path
+                    
+                    # Excluir a imagem antiga após salvar a nova com sucesso
+                    delete_image(old_image)
+            
+            # Salvar no banco de dados
+            db.session.commit()
+            
+            flash('Post atualizado com sucesso!', 'success')
+            return redirect(url_for('main.admin_blog_posts'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erro ao atualizar post: {str(e)}', 'error')
+    
+    now = datetime.now()
+    return render_template('admin/blog_post_form.html',
+                          form=form,
+                          title="Editar Post",
+                          post=post,
+                          active_page='blog',
+                          now=now)
+
+@main.route('/admin/blog/delete/<int:id>')
+@admin_required
+def delete_blog_post(id):
+    post = BlogPost.query.get_or_404(id)
+    
+    try:
+        # Guardar referência à imagem antes de excluir o post
+        image_filename = post.featured_image
+        
+        # Remover post do banco de dados
+        db.session.delete(post)
+        db.session.commit()
+        
+        # Depois da exclusão bem-sucedida no banco, excluir o arquivo de imagem
+        delete_image(image_filename)
+        
+        flash('Post excluído com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Erro ao excluir post: {str(e)}', 'error')
+    
+    return redirect(url_for('main.admin_blog_posts'))

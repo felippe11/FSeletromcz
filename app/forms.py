@@ -31,3 +31,12 @@ class ProductForm(FlaskForm):
     image = FileField('Imagem do Produto', validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Apenas imagens!')])
     active = BooleanField('Produto Ativo', default=True)
     submit = SubmitField('Salvar')
+
+class BlogPostForm(FlaskForm):
+    title = StringField('Título', validators=[DataRequired(), Length(min=3, max=200)])
+    slug = StringField('URL amigável', validators=[DataRequired(), Length(min=3, max=200)])
+    summary = TextAreaField('Resumo', validators=[Length(max=300)])
+    content = TextAreaField('Conteúdo', validators=[DataRequired()])
+    featured_image = FileField('Imagem Destacada', validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Apenas imagens!')])
+    published = BooleanField('Publicar', default=True)
+    submit = SubmitField('Salvar')

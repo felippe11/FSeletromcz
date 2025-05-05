@@ -1,0 +1,273 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} - FS Eletromcz Admin{% endblock %}
+
+{% block styles %}
+<style>
+    .image-upload-container {
+        margin-top: 10px;
+        padding: 15px;
+        border: 2px dashed #ddd;
+        border-radius: 5px;
+        text-align: center;
+        transition: all 0.3s;
+    }
+    .image-upload-container:hover {
+        border-color: #a855f7;
+        background-color: #faf5ff;
+    }
+    .preview-image {
+        max-width: 150px;
+        max-height: 150px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .ck-editor__editable_inline {
+        min-height: 300px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">{{ title }}</h1>
+        <a href="{{ url_for('main.admin_blog_posts') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+        </a>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-sm">
+        <form method="POST" enctype="multipart/form-data" id="post-form">
+            {{ form.hidden_tag() }}
+            
+            <div class="mb-4">
+                {{ form.title.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.title(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Título do post") }}
+                {% if form.title.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.title.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-4">
+                {{ form.slug.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                <div class="flex">
+                    {{ form.slug(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="url-amigavel-do-post") }}
+                    <button type="button" id="generate-slug" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <p class="text-gray-500 text-xs mt-1">URL amigável para o post. Clique no botão para gerar automaticamente a partir do título.</p>
+                {% if form.slug.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.slug.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-4">
+                {{ form.summary.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.summary(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="3", placeholder="Um breve resumo do post") }}
+                <p class="text-gray-500 text-xs mt-1">Máximo 300 caracteres. Utilizado na listagem e compartilhamento.</p>
+                {% if form.summary.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.summary.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Conteúdo</label>
+                <!-- Campo oculto que será enviado no formulário -->
+                <input type="hidden" name="content" id="content-hidden">
+                <!-- Campo para o CKEditor -->
+                <div id="editor">{{ form.content.data|safe if form.content.data else '' }}</div>
+                {% if form.content.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.content.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="mb-4">
+                <div class="flex items-center justify-between">
+                    {{ form.featured_image.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                    {% if post and post.featured_image %}
+                        <span class="text-blue-600 text-xs">Imagem atual: {{ post.featured_image }}</span>
+                    {% endif %}
+                </div>
+                <div class="image-upload-container">
+                    <label for="featured_image" class="cursor-pointer">
+                        <i class="fas fa-upload text-purple-500 text-xl mb-2"></i>
+                        <p class="text-gray-600">Clique para selecionar uma imagem ou arraste e solte aqui</p>
+                        {% if post and post.featured_image %}
+                            <img id="image-preview" src="{{ url_for('static', filename='img/products/' + post.featured_image) }}" class="preview-image mx-auto" alt="Preview">
+                        {% else %}
+                            <img id="image-preview" src="#" class="preview-image mx-auto hidden" alt="Preview">
+                        {% endif %}
+                    </label>
+                    {{ form.featured_image(class="hidden", id="featured_image") }}
+                </div>
+                <p class="text-gray-500 text-xs mt-1">Imagem destacada do post. Formatos: jpg, jpeg, png.</p>
+                {% if form.featured_image.errors %}
+                    <div class="text-red-500 text-xs mt-1">
+                        {% for error in form.featured_image.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="mb-6">
+                <label class="flex items-center">
+                    {{ form.published(class="w-4 h-4 mr-2") }}
+                    <span class="text-gray-700">{{ form.published.label }}</span>
+                </label>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <button type="submit" id="submit-button" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Salvar
+                </button>
+                {% if post %}
+                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" target="_blank" class="inline-block align-baseline text-sm text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-eye mr-1"></i> Visualizar post
+                    </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script>
+    // Variável para armazenar a instância do editor
+    let editorInstance;
+
+    // Inicializar o CKEditor
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            toolbar: [
+                'heading', '|',
+                'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                'blockQuote', 'insertTable', '|',
+                'undo', 'redo'
+            ]
+        })
+        .then(editor => {
+            // Armazenar a instância do editor para uso posterior
+            editorInstance = editor;
+            
+            // Adicionar um ouvinte para o evento de envio de formulário
+            document.getElementById('post-form').addEventListener('submit', function(e) {
+                // Obter o conteúdo do editor
+                const editorData = editorInstance.getData();
+                
+                // Atualizar o campo oculto com o conteúdo do editor
+                document.getElementById('content-hidden').value = editorData;
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao inicializar o editor:', error);
+        });
+
+    // Função para gerar slug
+    function generateSlug(text) {
+        return text.toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remover acentos
+            .replace(/[^\w\s-]/g, '') // Remover caracteres especiais
+            .replace(/[\s_-]+/g, '-') // Substituir espaços e underscores por hífens
+            .replace(/^-+|-+$/g, ''); // Remover hífens do início e final
+    }
+
+    // Auto-gerar slug a partir do título
+    document.getElementById('title').addEventListener('blur', function() {
+        const slugField = document.getElementById('slug');
+        if (slugField.value === '') {
+            slugField.value = generateSlug(this.value);
+        }
+    });
+
+    // Botão para gerar slug manualmente
+    document.getElementById('generate-slug').addEventListener('click', function() {
+        const title = document.getElementById('title').value;
+        const slugField = document.getElementById('slug');
+        
+        if (title) {
+            slugField.value = generateSlug(title);
+        } else {
+            alert('Por favor, insira um título primeiro.');
+        }
+    });
+
+    // Preview de imagem
+    document.getElementById('featured_image').addEventListener('change', function(e) {
+        const preview = document.getElementById('image-preview');
+        const file = e.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            }
+            
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Drag and drop para upload de imagem
+    const dropArea = document.querySelector('.image-upload-container');
+    const fileInput = document.getElementById('featured_image');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+        dropArea.classList.add('bg-purple-50');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('bg-purple-50');
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        if (files.length) {
+            fileInput.files = files;
+            const event = new Event('change');
+            fileInput.dispatchEvent(event);
+        }
+    }
+</script>
+{% endblock %}

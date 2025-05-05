@@ -71,6 +71,7 @@
                     <a href="{{ url_for('main.home') }}#services" class="nav-link text-gray-700 hover:text-blue-500">Serviços</a>
                     <a href="{{ url_for('main.home') }}#about" class="nav-link text-gray-700 hover:text-blue-500">Sobre</a>
                     <a href="{{ url_for('main.loja') }}" class="nav-link text-gray-700 hover:text-blue-500 {% if active_page == 'loja' %}text-blue-500{% endif %}">Loja</a>
+                    <a href="{{ url_for('main.blog') }}" class="nav-link text-gray-700 hover:text-blue-500 {% if active_page == 'blog' %}text-blue-500{% endif %}">Blog</a>
                     <a href="{{ url_for('main.home') }}#contact" class="nav-link text-gray-700 hover:text-blue-500">Contato</a>
                     <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center">
                         <i class="fab fa-whatsapp mr-2"></i> Orçamento
@@ -91,6 +92,7 @@
                     <a href="{{ url_for('main.home') }}#services" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Serviços</a>
                     <a href="{{ url_for('main.home') }}#about" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Sobre</a>
                     <a href="{{ url_for('main.loja') }}" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200 {% if active_page == 'loja' %}text-blue-500{% endif %}">Loja</a>
+                    <a href="{{ url_for('main.blog') }}" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200 {% if active_page == 'blog' %}text-blue-500{% endif %}">Blog</a>
                     <a href="{{ url_for('main.home') }}#contact" class="text-gray-700 hover:text-blue-500 py-2 px-1 border-b border-gray-200">Contato</a>
                     <a href="https://wa.me/5582988916657" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full transition duration-300 flex items-center justify-center">
                         <i class="fab fa-whatsapp mr-2"></i> Orçamento
@@ -133,6 +135,7 @@
                         <li><a href="{{ url_for('main.home') }}#services" class="text-white-400 hover:text-white transition duration-300">Serviços</a></li>
                         <li><a href="{{ url_for('main.home') }}#about" class="text-white-400 hover:text-white transition duration-300">Sobre</a></li>
                         <li><a href="{{ url_for('main.loja') }}" class="text-white-400 hover:text-white transition duration-300">Loja</a></li>
+                        <li><a href="{{ url_for('main.blog') }}" class="text-white-400 hover:text-white transition duration-300">Blog</a></li>
                         <li><a href="{{ url_for('main.home') }}#contact" class="text-white-400 hover:text-white transition duration-300">Contato</a></li>
                     </ul>
                 </div>

@@ -21,6 +21,9 @@
                 <a href="{{ url_for('main.loja') }}" class="hover:text-blue-200" target="_blank">
                     <i class="fas fa-store mr-1"></i> Ver Loja
                 </a>
+                <a href="{{ url_for('main.blog') }}" class="hover:text-blue-200" target="_blank">
+                    <i class="fas fa-rss mr-1"></i> Ver Blog
+                </a>
                 <a href="{{ url_for('main.logout') }}" class="hover:text-blue-200">
                     <i class="fas fa-sign-out-alt mr-1"></i> Sair
                 </a>
@@ -37,6 +40,9 @@
                 </a>
                 <a href="{{ url_for('main.admin_products') }}" class="block py-2 px-4 rounded {% if active_page == 'products' %}bg-blue-700{% else %}hover:bg-blue-800{% endif %}">
                     <i class="fas fa-box mr-2"></i> Produtos
+                </a>
+                <a href="{{ url_for('main.admin_blog_posts') }}" class="block py-2 px-4 rounded {% if active_page == 'blog' %}bg-blue-700{% else %}hover:bg-blue-800{% endif %}">
+                    <i class="fas fa-blog mr-2"></i> Blog
                 </a>
             </div>
         </aside>
