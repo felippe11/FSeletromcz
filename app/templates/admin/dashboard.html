@@ -1,0 +1,51 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard - FS Eletromcz Admin{% endblock %}
+
+{% block content %}
+    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card de produtos -->
+        <div class="bg-blue-50 p-6 rounded-lg shadow-sm border border-blue-100">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-blue-800">Produtos</h2>
+                <span class="text-3xl font-bold text-blue-600">{{ product_count }}</span>
+            </div>
+            <p class="text-gray-600 mt-2">Total de produtos cadastrados</p>
+            <div class="mt-4">
+                <a href="{{ url_for('main.admin_products') }}" class="text-blue-600 hover:text-blue-800 text-sm flex items-center">
+                    Gerenciar produtos <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Card de produto mais recente -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-sm border border-green-100">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-green-800">Produto recente</h2>
+                <span class="text-sm bg-green-200 text-green-800 px-2 py-1 rounded">{{ latest_product.created_at.strftime('%d/%m/%Y') if latest_product else 'Nenhum' }}</span>
+            </div>
+            <p class="text-gray-600 mt-2">{% if latest_product %}{{ latest_product.name }} - {{ latest_product.price|format_currency }}{% else %}Nenhum produto cadastrado{% endif %}</p>
+            {% if latest_product %}
+                <div class="mt-4">
+                    <a href="{{ url_for('main.edit_product', id=latest_product.id) }}" class="text-green-600 hover:text-green-800 text-sm flex items-center">
+                        Editar <i class="fas fa-edit ml-1"></i>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h2 class="text-xl font-bold mb-4">Ações Rápidas</h2>
+        <div class="flex flex-wrap gap-4">
+            <a href="{{ url_for('main.new_product') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
+                <i class="fas fa-plus mr-2"></i> Novo Produto
+            </a>
+            <a href="{{ url_for('main.loja') }}" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
+                <i class="fas fa-store mr-2"></i> Ver Loja
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -24,101 +24,31 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Produto 1: Nobreak 600VA -->
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="{{ url_for('static', filename='img/services-1.png') }}" alt="Nobreak 600VA" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Nobreak 600VA</h3>
-                        <div class="flex items-center mb-4">
-                            <span class="text-blue-500 font-bold text-lg">R$ 499,90</span>
-                            <span class="text-gray-500 line-through ml-2">R$ 599,90</span>
+                {% if products %}
+                    {% for product in products %}
+                        <!-- Produto: {{ product.name }} -->
+                        <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">{{ product.name }}</h3>
+                                <div class="flex items-center mb-4">
+                                    <span class="text-blue-500 font-bold text-lg">{{ product.price|format_currency }}</span>
+                                    {% if product.old_price %}
+                                        <span class="text-gray-500 line-through ml-2">{{ product.old_price|format_currency }}</span>
+                                    {% endif %}
+                                </div>
+                                <p class="text-gray-600 mb-6">{{ product.description }}</p>
+                                <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20{{ product.name|urlencode }}.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
+                                    <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
+                                </a>
+                            </div>
                         </div>
-                        <p class="text-gray-600 mb-6">Nobreak ideal para computadores e equipamentos com baixo consumo de energia. Proteção contra subtensão e sobretensão, com autonomia de até 25 minutos.</p>
-                        <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20Nobreak%20600VA.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
-                            <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
-                        </a>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-span-3 text-center py-16">
+                        <p class="text-gray-600 text-xl">Nenhum produto disponível no momento. Volte em breve!</p>
                     </div>
-                </div>
-
-                <!-- Produto 2: Nobreak 1200VA -->
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="{{ url_for('static', filename='img/services-2.png') }}" alt="Nobreak 1200VA" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Nobreak 1200VA</h3>
-                        <div class="flex items-center mb-4">
-                            <span class="text-blue-500 font-bold text-lg">R$ 799,90</span>
-                            <span class="text-gray-500 line-through ml-2">R$ 899,90</span>
-                        </div>
-                        <p class="text-gray-600 mb-6">Nobreak de alta performance para computadores, servidores e equipamentos sensíveis. Com autonomia estendida e proteção completa contra problemas na rede elétrica.</p>
-                        <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20Nobreak%201200VA.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
-                            <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Produto 3: Bateria Selada 12V 7Ah -->
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="{{ url_for('static', filename='img/services-3.png') }}" alt="Bateria Selada 12V 7Ah" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Bateria Selada 12V 7Ah</h3>
-                        <div class="flex items-center mb-4">
-                            <span class="text-blue-500 font-bold text-lg">R$ 199,90</span>
-                            <span class="text-gray-500 line-through ml-2">R$ 249,90</span>
-                        </div>
-                        <p class="text-gray-600 mb-6">Bateria selada de alta qualidade para nobreaks, com vida útil prolongada. Não requer manutenção e possui resistência a descargas profundas.</p>
-                        <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20na%20Bateria%20Selada%2012V%207Ah.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
-                            <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Produto 4: Estabilizador 1000VA -->
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="{{ url_for('static', filename='img/services-4.png') }}" alt="Estabilizador 1000VA" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Estabilizador 1000VA</h3>
-                        <div class="flex items-center mb-4">
-                            <span class="text-blue-500 font-bold text-lg">R$ 299,90</span>
-                            <span class="text-gray-500 line-through ml-2">R$ 349,90</span>
-                        </div>
-                        <p class="text-gray-600 mb-6">Estabilizador de tensão microprocessado com 5 tomadas de saída. Proteção contra sobrecargas e curto-circuito. Ideal para equipamentos sensíveis.</p>
-                        <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20Estabilizador%201000VA.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
-                            <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Produto 5: Nobreak 2000VA Online -->
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="{{ url_for('static', filename='img/services-5.png') }}" alt="Nobreak 2000VA Online" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Nobreak 2000VA Online</h3>
-                        <div class="flex items-center mb-4">
-                            <span class="text-blue-500 font-bold text-lg">R$ 2.999,90</span>
-                            <span class="text-gray-500 line-through ml-2">R$ 3.499,90</span>
-                        </div>
-                        <p class="text-gray-600 mb-6">Nobreak online de dupla conversão para missões críticas. Ideal para servidores, equipamentos médicos e industriais. Proteção total contra problemas na rede elétrica.</p>
-                        <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20Nobreak%202000VA%20Online.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
-                            <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Produto 6: Kit 4 Baterias para Nobreak -->
-                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="{{ url_for('static', filename='img/services-6.png') }}" alt="Kit 4 Baterias para Nobreak" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Kit 4 Baterias para Nobreak</h3>
-                        <div class="flex items-center mb-4">
-                            <span class="text-blue-500 font-bold text-lg">R$ 699,90</span>
-                            <span class="text-gray-500 line-through ml-2">R$ 899,90</span>
-                        </div>
-                        <p class="text-gray-600 mb-6">Kit com 4 baterias seladas de 12V 7Ah para nobreaks de maior potência. Ideal para expandir a autonomia do seu equipamento em situações críticas.</p>
-                        <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20Kit%204%20Baterias%20para%20Nobreak.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300">
-                            <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
-                        </a>
-                    </div>
-                </div>
+                {% endif %}
 
             </div>
         </div>

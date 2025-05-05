@@ -15,4 +15,11 @@ class Config:
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = ('FS Eletromcz', os.getenv('MAIL_USERNAME'))
-    # Add other configuration variables as needed
+    
+    # Configurações do banco de dados
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'sqlite:///fs_eletromcz.db'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+    # Pasta para upload de imagens de produtos
+    UPLOAD_FOLDER = os.path.join('app', 'static', 'img', 'products')
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB limite para uploads

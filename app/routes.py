@@ -1,13 +1,19 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app, make_response
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, current_app, make_response, abort
+from flask_login import login_user, logout_user, login_required, current_user
+from werkzeug.utils import secure_filename
 from flask_mail import Message
 from . import mail
+from .models import db, User, Product
+from .forms import LoginForm, ProductForm
 import os
 import requests
 import json
 import time
 import logging
+import locale
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+import uuid
 
 # Carrega variáveis de ambiente
 load_dotenv()
@@ -23,6 +29,47 @@ reviews_cache = {
 }
 
 main = Blueprint('main', __name__)
+
+# Filtro personalizado para formatar preços
+@main.app_template_filter('format_currency')
+def format_currency(value):
+    if value is None:
+        return "R$ 0,00"
+    return f"R$ {value:.2f}".replace('.', ',')
+
+# Verificação admin para decoradores
+def admin_required(f):
+    @login_required
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_admin:
+            flash('Acesso negado. Você precisa ser um administrador.', 'error')
+            return redirect(url_for('main.login'))
+        return f(*args, **kwargs)
+    decorated_function.__name__ = f.__name__
+    return decorated_function
+
+# Função auxiliar para upload de imagens
+def save_image(file):
+    if not file:
+        return None
+    
+    # Gerar nome único para o arquivo
+    filename = secure_filename(file.filename)
+    # Adicionar timestamp ou UUID para garantir unicidade
+    unique_filename = f"{uuid.uuid4().hex}_{filename}"
+    
+    # Caminho completo para salvar o arquivo
+    file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
+    
+    # Salvar o arquivo
+    try:
+        file.save(file_path)
+        # Retornar apenas o nome do arquivo para armazenar no banco de dados
+        # A função save_image será usada para novas uploads, por isso alteramos aqui
+        return unique_filename
+    except Exception as e:
+        logging.error(f"Erro ao salvar imagem: {e}")
+        return None
 
 @main.route('/')
 def home():
@@ -411,4 +458,153 @@ def enviar_contato():
 
 @main.route('/loja')
 def loja():
-    return render_template('loja.html', active_page='loja')
+    # Buscar produtos ativos do banco de dados
+    products = Product.query.filter_by(active=True).order_by(Product.id.desc()).all()
+    return render_template('loja.html', active_page='loja', products=products)
+
+# Rotas administrativas
+@main.route('/admin/login', methods=['GET', 'POST'])
+def login():
+    # Verificar se o usuário já está autenticado
+    if current_user.is_authenticated:
+        return redirect(url_for('main.admin_dashboard'))
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user)
+            flash('Login efetuado com sucesso!', 'success')
+            return redirect(url_for('main.admin_dashboard'))
+        else:
+            flash('Nome de usuário ou senha incorretos.', 'error')
+    
+    return render_template('admin/login.html', form=form)
+
+@main.route('/admin/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Você foi desconectado.', 'success')
+    return redirect(url_for('main.login'))
+
+@main.route('/admin')
+@admin_required
+def admin_dashboard():
+    # Estatísticas para o dashboard
+    product_count = Product.query.count()
+    latest_product = Product.query.order_by(Product.created_at.desc()).first()
+    
+    # Incluir o ano atual para o footer
+    now = datetime.now()
+    
+    return render_template('admin/dashboard.html', 
+                          active_page='dashboard',
+                          product_count=product_count,
+                          latest_product=latest_product,
+                          now=now)
+
+@main.route('/admin/products')
+@admin_required
+def admin_products():
+    products = Product.query.order_by(Product.id.desc()).all()
+    now = datetime.now()
+    
+    return render_template('admin/products.html', 
+                          active_page='products',
+                          products=products,
+                          now=now)
+
+@main.route('/admin/products/new', methods=['GET', 'POST'])
+@admin_required
+def new_product():
+    form = ProductForm()
+    
+    if form.validate_on_submit():
+        try:
+            # Criar novo produto
+            product = Product(
+                name=form.name.data,
+                description=form.description.data,
+                price=form.price.data,
+                old_price=form.old_price.data if form.old_price.data else None,
+                active=form.active.data
+            )
+            
+            # Processar upload de imagem
+            if form.image.data:
+                image_path = save_image(form.image.data)
+                if image_path:
+                    product.image = image_path
+            
+            # Salvar no banco de dados
+            db.session.add(product)
+            db.session.commit()
+            
+            flash('Produto adicionado com sucesso!', 'success')
+            return redirect(url_for('main.admin_products'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erro ao adicionar produto: {str(e)}', 'error')
+    
+    now = datetime.now()
+    return render_template('admin/product_form.html',
+                          form=form,
+                          title="Adicionar",
+                          product=None,
+                          active_page='products',
+                          now=now)
+
+@main.route('/admin/products/edit/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def edit_product(id):
+    product = Product.query.get_or_404(id)
+    form = ProductForm(obj=product)
+    
+    if form.validate_on_submit():
+        try:
+            # Atualizar dados do produto
+            product.name = form.name.data
+            product.description = form.description.data
+            product.price = form.price.data
+            product.old_price = form.old_price.data if form.old_price.data else None
+            product.active = form.active.data
+            
+            # Processar upload de nova imagem - apenas se um arquivo for selecionado
+            if form.image.data and hasattr(form.image.data, 'filename') and form.image.data.filename:
+                image_path = save_image(form.image.data)
+                if image_path:
+                    product.image = image_path
+            
+            # Salvar no banco de dados
+            db.session.commit()
+            
+            flash('Produto atualizado com sucesso!', 'success')
+            return redirect(url_for('main.admin_products'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erro ao atualizar produto: {str(e)}', 'error')
+    
+    now = datetime.now()
+    return render_template('admin/product_form.html',
+                          form=form,
+                          title="Editar",
+                          product=product,
+                          active_page='products',
+                          now=now)
+
+@main.route('/admin/products/delete/<int:id>')
+@admin_required
+def delete_product(id):
+    product = Product.query.get_or_404(id)
+    
+    try:
+        # Remover produto do banco de dados
+        db.session.delete(product)
+        db.session.commit()
+        flash('Produto excluído com sucesso!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Erro ao excluir produto: {str(e)}', 'error')
+    
+    return redirect(url_for('main.admin_products'))

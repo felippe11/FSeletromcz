@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FS Eletromcz Admin</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-blue-900 flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md">
+        <div class="bg-white shadow-lg rounded-lg p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-blue-800 mb-2">FS Eletromcz</h1>
+                <p class="text-gray-600">Painel Administrativo</p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-4 p-4 {% if category == 'error' %}bg-red-100 text-red-700 border border-red-200{% elif category == 'success' %}bg-green-100 text-green-700 border border-green-200{% else %}bg-blue-100 text-blue-700 border border-blue-200{% endif %} rounded">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('main.login') }}">
+                {{ form.csrf_token }}
+                
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 mb-2">Nome de usuário</label>
+                    {{ form.username(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder="Seu nome de usuário", autocomplete="username") }}
+                    {% if form.username.errors %}
+                        <span class="text-red-500 text-sm">{{ form.username.errors[0] }}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 mb-2">Senha</label>
+                    {{ form.password(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder="Sua senha", autocomplete="current-password") }}
+                    {% if form.password.errors %}
+                        <span class="text-red-500 text-sm">{{ form.password.errors[0] }}</span>
+                    {% endif %}
+                </div>
+                
+                <div>
+                    {{ form.submit(class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300") }}
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center text-sm text-gray-600">
+                <a href="{{ url_for('main.home') }}" class="text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-arrow-left mr-1"></i> Voltar para o site
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

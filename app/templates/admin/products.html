@@ -1,0 +1,74 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Produtos - FS Eletromcz Admin{% endblock %}
+
+{% block content %}
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Gerenciar Produtos</h1>
+        <a href="{{ url_for('main.new_product') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
+            <i class="fas fa-plus mr-2"></i> Novo Produto
+        </a>
+    </div>
+
+    {% if products %}
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-3 px-4 text-left font-medium text-gray-600">Imagem</th>
+                        <th class="py-3 px-4 text-left font-medium text-gray-600">Nome</th>
+                        <th class="py-3 px-4 text-left font-medium text-gray-600">Preço (R$)</th>
+                        <th class="py-3 px-4 text-left font-medium text-gray-600">Status</th>
+                        <th class="py-3 px-4 text-center font-medium text-gray-600">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for product in products %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4">
+                                <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}" class="w-16 h-16 object-cover rounded">
+                            </td>
+                            <td class="py-2 px-4">{{ product.name }}</td>
+                            <td class="py-2 px-4">
+                                <div>{{ product.price|format_currency }}</div>
+                                {% if product.old_price %}
+                                    <div class="text-sm text-gray-500 line-through">{{ product.old_price|format_currency }}</div>
+                                {% endif %}
+                            </td>
+                            <td class="py-2 px-4">
+                                {% if product.active %}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Ativo
+                                    </span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        Inativo
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td class="py-2 px-4 text-center">
+                                <a href="{{ url_for('main.edit_product', id=product.id) }}" class="text-blue-600 hover:text-blue-800 mx-1" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ url_for('main.delete_product', id=product.id) }}" class="text-red-600 hover:text-red-800 mx-1" 
+                                   onclick="return confirm('Tem certeza que deseja excluir este produto?')" title="Excluir">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center py-10">
+            <div class="text-gray-500 mb-4">
+                <i class="fas fa-box-open text-5xl"></i>
+            </div>
+            <h2 class="text-xl font-medium text-gray-600 mb-4">Nenhum produto cadastrado</h2>
+            <a href="{{ url_for('main.new_product') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded inline-flex items-center transition duration-300">
+                <i class="fas fa-plus mr-2"></i> Adicionar Primeiro Produto
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
