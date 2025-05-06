@@ -17,33 +17,66 @@
         background-color: #faf5ff;
     }
     .preview-image {
-        max-width: 150px;
+        max-width: 100%;
+        height: auto;
         max-height: 150px;
-        margin: 10px 0;
+        margin: 10px auto;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .ck-editor__editable_inline {
-        min-height: 300px;
+        min-height: 250px;
+    }
+    /* Estilos responsivos */
+    @media (max-width: 640px) {
+        .ck-editor__editable_inline {
+            min-height: 200px;
+        }
+        .flex-responsive {
+            flex-direction: column;
+        }
+        .flex-responsive button {
+            margin-top: 0.5rem;
+            width: 100%;
+        }
+        .ck.ck-toolbar {
+            flex-wrap: wrap;
+        }
+        .ck.ck-toolbar .ck-toolbar__items {
+            flex-wrap: wrap;
+        }
+    }
+    @media (hover: none) {
+        /* Melhorar comportamento de toque para dispositivos mobile */
+        input, textarea, button, select, .preview-image {
+            font-size: 16px !important; /* Previne zoom automático no iOS */
+        }
+        .image-upload-container {
+            padding: 20px;
+        }
+        .ck.ck-button {
+            min-width: 36px; /* Botões maiores para toque */
+            min-height: 36px;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold">{{ title }}</h1>
-        <a href="{{ url_for('main.admin_blog_posts') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-2 sm:px-0">
+        <h1 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-0">{{ title }}</h1>
+        <a href="{{ url_for('main.admin_blog_posts') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center text-sm">
             <i class="fas fa-arrow-left mr-2"></i> Voltar
         </a>
     </div>
 
-    <div class="bg-white p-6 rounded-lg shadow-sm">
+    <div class="bg-white p-4 sm:p-6 rounded-lg shadow-sm mx-2 sm:mx-0">
         <form method="POST" enctype="multipart/form-data" id="post-form">
             {{ form.hidden_tag() }}
             
             <div class="mb-4">
                 {{ form.title.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-                {{ form.title(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Título do post") }}
+                {{ form.title(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Título do post") }}
                 {% if form.title.errors %}
                     <div class="text-red-500 text-xs mt-1">
                         {% for error in form.title.errors %}
@@ -55,10 +88,10 @@
             
             <div class="mb-4">
                 {{ form.slug.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-                <div class="flex">
-                    {{ form.slug(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="url-amigavel-do-post") }}
-                    <button type="button" id="generate-slug" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                        <i class="fas fa-sync-alt"></i>
+                <div class="flex flex-col sm:flex-row">
+                    {{ form.slug(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="url-amigavel-do-post") }}
+                    <button type="button" id="generate-slug" class="mt-2 sm:mt-0 sm:ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded">
+                        <i class="fas fa-sync-alt mr-1"></i> Gerar
                     </button>
                 </div>
                 <p class="text-gray-500 text-xs mt-1">URL amigável para o post. Clique no botão para gerar automaticamente a partir do título.</p>
@@ -73,7 +106,7 @@
             
             <div class="mb-4">
                 {{ form.summary.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-                {{ form.summary(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="3", placeholder="Um breve resumo do post") }}
+                {{ form.summary(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="3", placeholder="Um breve resumo do post") }}
                 <p class="text-gray-500 text-xs mt-1">Máximo 300 caracteres. Utilizado na listagem e compartilhamento.</p>
                 {% if form.summary.errors %}
                     <div class="text-red-500 text-xs mt-1">
@@ -84,12 +117,12 @@
                 {% endif %}
             </div>
 
-            <div class="mb-4">
+            <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Conteúdo</label>
                 <!-- Campo oculto que será enviado no formulário -->
                 <input type="hidden" name="content" id="content-hidden">
                 <!-- Campo para o CKEditor -->
-                <div id="editor">{{ form.content.data|safe if form.content.data else '' }}</div>
+                <div id="editor" class="w-full">{{ form.content.data|safe if form.content.data else '' }}</div>
                 {% if form.content.errors %}
                     <div class="text-red-500 text-xs mt-1">
                         {% for error in form.content.errors %}
@@ -99,17 +132,17 @@
                 {% endif %}
             </div>
             
-            <div class="mb-4">
-                <div class="flex items-center justify-between">
+            <div class="mb-6">
+                <div class="flex flex-wrap items-center justify-between">
                     {{ form.featured_image.label(class="block text-gray-700 text-sm font-bold mb-2") }}
                     {% if post and post.featured_image %}
                         <span class="text-blue-600 text-xs">Imagem atual: {{ post.featured_image }}</span>
                     {% endif %}
                 </div>
-                <div class="image-upload-container">
-                    <label for="featured_image" class="cursor-pointer">
+                <div class="image-upload-container touch-manipulation">
+                    <label for="featured_image" class="cursor-pointer block">
                         <i class="fas fa-upload text-purple-500 text-xl mb-2"></i>
-                        <p class="text-gray-600">Clique para selecionar uma imagem ou arraste e solte aqui</p>
+                        <p class="text-gray-600 text-sm sm:text-base">Clique para selecionar ou arraste uma imagem</p>
                         {% if post and post.featured_image %}
                             <img id="image-preview" src="{{ url_for('static', filename='img/products/' + post.featured_image) }}" class="preview-image mx-auto" alt="Preview">
                         {% else %}
@@ -129,18 +162,18 @@
             </div>
 
             <div class="mb-6">
-                <label class="flex items-center">
-                    {{ form.published(class="w-4 h-4 mr-2") }}
-                    <span class="text-gray-700">{{ form.published.label }}</span>
+                <label class="flex items-center touch-manipulation">
+                    {{ form.published(class="w-5 h-5 mr-2") }}
+                    <span class="text-gray-700 text-base">{{ form.published.label }}</span>
                 </label>
             </div>
             
-            <div class="flex items-center justify-between">
-                <button type="submit" id="submit-button" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                <button type="submit" id="submit-button" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline">
                     Salvar
                 </button>
                 {% if post %}
-                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" target="_blank" class="inline-block align-baseline text-sm text-blue-600 hover:text-blue-800">
+                    <a href="{{ url_for('main.blog_post', slug=post.slug) }}" target="_blank" class="w-full sm:w-auto text-center inline-block align-baseline py-3 px-4 text-blue-600 hover:text-blue-800 border border-blue-600 rounded">
                         <i class="fas fa-eye mr-1"></i> Visualizar post
                     </a>
                 {% endif %}
@@ -155,15 +188,22 @@
     // Variável para armazenar a instância do editor
     let editorInstance;
 
-    // Inicializar o CKEditor
+    // Inicializar o CKEditor com configurações responsivas
     ClassicEditor
         .create(document.querySelector('#editor'), {
-            toolbar: [
-                'heading', '|',
-                'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
-                'blockQuote', 'insertTable', '|',
-                'undo', 'redo'
-            ]
+            toolbar: {
+                items: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                    'blockQuote', 'insertTable', '|',
+                    'undo', 'redo'
+                ],
+                shouldNotGroupWhenFull: true
+            },
+            // Configuração responsiva para touch
+            uiOptions: {
+                touchOffset: 10 // Aumenta área de toque
+            }
         })
         .then(editor => {
             // Armazenar a instância do editor para uso posterior
@@ -268,6 +308,31 @@
             const event = new Event('change');
             fileInput.dispatchEvent(event);
         }
+    }
+
+    // Verificar se estamos em um dispositivo móvel para ajustar o CKEditor
+    function isMobile() {
+        return window.innerWidth <= 640;
+    }
+
+    // Ajustar o editor quando a janela é redimensionada
+    window.addEventListener('resize', function() {
+        if (editorInstance) {
+            // Atualize o layout do editor se necessário
+            editorInstance.editing.view.change(writer => {
+                // Isto força o editor a recalcular seu layout
+                const viewRoot = editorInstance.editing.view.document.getRoot();
+                writer.addClass('resized', viewRoot);
+                writer.removeClass('resized', viewRoot);
+            });
+        }
+    });
+    
+    // Melhorar a experiência de toque
+    if ('ontouchstart' in window || navigator.maxTouchPoints) {
+        document.querySelectorAll('button, input, select, textarea, a').forEach(el => {
+            el.style.touchAction = 'manipulation';
+        });
     }
 </script>
 {% endblock %}

@@ -3,16 +3,16 @@
 {% block title %}Dashboard - FS Eletromcz Admin{% endblock %}
 
 {% block content %}
-    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+    <h1 class="text-2xl font-bold mb-4 sm:mb-6 text-center sm:text-left">Dashboard</h1>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- Card de produtos -->
-        <div class="bg-blue-50 p-6 rounded-lg shadow-sm border border-blue-100">
+        <div class="bg-blue-50 p-4 sm:p-6 rounded-lg shadow-sm border border-blue-100">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-blue-800">Produtos</h2>
-                <span class="text-3xl font-bold text-blue-600">{{ product_count }}</span>
+                <span class="text-2xl sm:text-3xl font-bold text-blue-600">{{ product_count }}</span>
             </div>
-            <p class="text-gray-600 mt-2">Total de produtos cadastrados</p>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Total de produtos cadastrados</p>
             <div class="mt-4">
                 <a href="{{ url_for('main.admin_products') }}" class="text-blue-600 hover:text-blue-800 text-sm flex items-center">
                     Gerenciar produtos <i class="fas fa-arrow-right ml-1"></i>
@@ -21,12 +21,12 @@
         </div>
         
         <!-- Card de produto mais recente -->
-        <div class="bg-green-50 p-6 rounded-lg shadow-sm border border-green-100">
+        <div class="bg-green-50 p-4 sm:p-6 rounded-lg shadow-sm border border-green-100">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-green-800">Produto recente</h2>
-                <span class="text-sm bg-green-200 text-green-800 px-2 py-1 rounded">{{ latest_product.created_at.strftime('%d/%m/%Y') if latest_product else 'Nenhum' }}</span>
+                <span class="text-xs sm:text-sm bg-green-200 text-green-800 px-2 py-1 rounded">{{ latest_product.created_at.strftime('%d/%m/%Y') if latest_product else 'Nenhum' }}</span>
             </div>
-            <p class="text-gray-600 mt-2">{% if latest_product %}{{ latest_product.name }} - {{ latest_product.price|format_currency }}{% else %}Nenhum produto cadastrado{% endif %}</p>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base truncate">{% if latest_product %}{{ latest_product.name }} - {{ latest_product.price|format_currency }}{% else %}Nenhum produto cadastrado{% endif %}</p>
             {% if latest_product %}
                 <div class="mt-4">
                     <a href="{{ url_for('main.edit_product', id=latest_product.id) }}" class="text-green-600 hover:text-green-800 text-sm flex items-center">
@@ -37,12 +37,12 @@
         </div>
         
         <!-- Card de posts do blog -->
-        <div class="bg-purple-50 p-6 rounded-lg shadow-sm border border-purple-100">
+        <div class="bg-purple-50 p-4 sm:p-6 rounded-lg shadow-sm border border-purple-100">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-purple-800">Blog</h2>
-                <span class="text-3xl font-bold text-purple-600">{{ post_count }}</span>
+                <span class="text-2xl sm:text-3xl font-bold text-purple-600">{{ post_count }}</span>
             </div>
-            <p class="text-gray-600 mt-2">Total de posts publicados</p>
+            <p class="text-gray-600 mt-2 text-sm sm:text-base">Total de posts publicados</p>
             <div class="mt-4">
                 <a href="{{ url_for('main.admin_blog_posts') }}" class="text-purple-600 hover:text-purple-800 text-sm flex items-center">
                     Gerenciar posts <i class="fas fa-arrow-right ml-1"></i>
@@ -51,21 +51,32 @@
         </div>
     </div>
 
-    <div class="mt-8">
-        <h2 class="text-xl font-bold mb-4">Ações Rápidas</h2>
-        <div class="flex flex-wrap gap-4">
-            <a href="{{ url_for('main.new_product') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
-                <i class="fas fa-plus mr-2"></i> Novo Produto
+    <div class="mt-6 sm:mt-8">
+        <h2 class="text-xl font-bold mb-3 sm:mb-4 text-center sm:text-left">Ações Rápidas</h2>
+        <div class="flex flex-wrap justify-center sm:justify-start gap-3 sm:gap-4">
+            <a href="{{ url_for('main.new_product') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-3 sm:px-4 py-2 rounded flex items-center transition duration-300">
+                <i class="fas fa-plus mr-1 sm:mr-2"></i> <span>Novo Produto</span>
             </a>
-            <a href="{{ url_for('main.new_blog_post') }}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
-                <i class="fas fa-edit mr-2"></i> Novo Post
+            <a href="{{ url_for('main.new_blog_post') }}" class="bg-purple-600 hover:bg-purple-700 text-white px-3 sm:px-4 py-2 rounded flex items-center transition duration-300">
+                <i class="fas fa-edit mr-1 sm:mr-2"></i> <span>Novo Post</span>
             </a>
-            <a href="{{ url_for('main.loja') }}" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
-                <i class="fas fa-store mr-2"></i> Ver Loja
+            <a href="{{ url_for('main.loja') }}" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white px-3 sm:px-4 py-2 rounded flex items-center transition duration-300">
+                <i class="fas fa-store mr-1 sm:mr-2"></i> <span>Ver Loja</span>
             </a>
-            <a href="{{ url_for('main.blog') }}" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded flex items-center transition duration-300">
-                <i class="fas fa-rss mr-2"></i> Ver Blog
+            <a href="{{ url_for('main.blog') }}" target="_blank" class="bg-gray-600 hover:bg-gray-700 text-white px-3 sm:px-4 py-2 rounded flex items-center transition duration-300">
+                <i class="fas fa-rss mr-1 sm:mr-2"></i> <span>Ver Blog</span>
             </a>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Ajusta o tamanho do texto nos botões em telas muito pequenas
+    if (window.innerWidth < 360) {
+        document.querySelectorAll('.flex.flex-wrap a span').forEach(span => {
+            span.style.fontSize = '0.8rem';
+        });
+    }
+</script>
 {% endblock %}

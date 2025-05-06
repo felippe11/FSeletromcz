@@ -3,19 +3,19 @@
 {% block title %}{{ title }} Produto - FS Eletromcz Admin{% endblock %}
 
 {% block content %}
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold">{{ title }} Produto</h1>
-        <p class="text-gray-600">Preencha os campos abaixo para {{ 'adicionar um novo' if product is none else 'editar o' }} produto.</p>
+    <div class="mb-6 px-2 sm:px-0">
+        <h1 class="text-xl sm:text-2xl font-bold">{{ title }} Produto</h1>
+        <p class="text-gray-600 text-sm sm:text-base">Preencha os campos abaixo para {{ 'adicionar um novo' if product is none else 'editar o' }} produto.</p>
     </div>
 
-    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form method="POST" enctype="multipart/form-data" class="space-y-6 px-2 sm:px-0">
         {{ form.csrf_token }}
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <!-- Nome do produto -->
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ form.name.label }}</label>
-                {{ form.name(class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                {{ form.name(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-base") }}
                 {% if form.name.errors %}
                     <span class="text-red-500 text-xs">{{ form.name.errors[0] }}</span>
                 {% endif %}
@@ -24,54 +24,54 @@
             <!-- Imagem do produto -->
             <div>
                 <label for="image" class="block text-sm font-medium text-gray-700 mb-1">{{ form.image.label }}</label>
-                {{ form.image(class="w-full p-2 border border-gray-300 rounded") }}
+                {{ form.image(class="w-full p-2 border border-gray-300 rounded text-sm") }}
                 {% if form.image.errors %}
                     <span class="text-red-500 text-xs">{{ form.image.errors[0] }}</span>
                 {% endif %}
                 {% if product and product.image %}
                     <div class="mt-2">
                         <p class="text-sm text-gray-500 mb-1">Imagem atual:</p>
-                        <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}" class="w-20 h-20 object-cover rounded border">
+                        <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded border">
                     </div>
                 {% endif %}
             </div>
         </div>
         
         <!-- Preços -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
                 <label for="price" class="block text-sm font-medium text-gray-700 mb-1">{{ form.price.label }}</label>
                 {% if product and product.price is defined %}
                     {% set price_value = "{:.2f}".format(product.price).replace('.', ',') %}
-                    {{ form.price(class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", value=price_value) }}
+                    {{ form.price(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-base", value=price_value) }}
                 {% else %}
-                    {{ form.price(class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    {{ form.price(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-base") }}
                 {% endif %}
                 {% if form.price.errors %}
                     <span class="text-red-500 text-xs">{{ form.price.errors[0] }}</span>
                 {% endif %}
-                <small class="text-gray-500">Use vírgula como separador decimal (ex: 100,00)</small>
+                <small class="text-gray-500 block mt-1">Use vírgula como separador decimal (ex: 100,00)</small>
             </div>
             
             <div>
                 <label for="old_price" class="block text-sm font-medium text-gray-700 mb-1">{{ form.old_price.label }} (opcional)</label>
                 {% if product and product.old_price %}
                     {% set old_price_value = "{:.2f}".format(product.old_price).replace('.', ',') %}
-                    {{ form.old_price(class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", value=old_price_value) }}
+                    {{ form.old_price(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-base", value=old_price_value) }}
                 {% else %}
-                    {{ form.old_price(class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+                    {{ form.old_price(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-base") }}
                 {% endif %}
                 {% if form.old_price.errors %}
                     <span class="text-red-500 text-xs">{{ form.old_price.errors[0] }}</span>
                 {% endif %}
-                <small class="text-gray-500">Use vírgula como separador decimal (ex: 100,00)</small>
+                <small class="text-gray-500 block mt-1">Use vírgula como separador decimal (ex: 100,00)</small>
             </div>
         </div>
         
         <!-- Descrição -->
         <div>
             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">{{ form.description.label }}</label>
-            {{ form.description(class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500", rows="6") }}
+            {{ form.description(class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-base", rows="6") }}
             {% if form.description.errors %}
                 <span class="text-red-500 text-xs">{{ form.description.errors[0] }}</span>
             {% endif %}
@@ -80,17 +80,17 @@
         <!-- Status -->
         <div>
             <label class="flex items-center">
-                {{ form.active(class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded") }}
-                <span class="ml-2 text-sm text-gray-700">{{ form.active.label }}</span>
+                {{ form.active(class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded") }}
+                <span class="ml-2 text-base text-gray-700">{{ form.active.label }}</span>
             </label>
         </div>
         
         <!-- Botões de ação -->
-        <div class="flex justify-between pt-4">
-            <a href="{{ url_for('main.admin_products') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded transition duration-300">
+        <div class="flex flex-col sm:flex-row justify-between gap-3 pt-4">
+            <a href="{{ url_for('main.admin_products') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded transition duration-300 text-center">
                 Cancelar
             </a>
-            {{ form.submit(class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-300") }}
+            {{ form.submit(class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded transition duration-300") }}
         </div>
     </form>
 {% endblock %}

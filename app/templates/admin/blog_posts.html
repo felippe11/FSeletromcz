@@ -3,15 +3,16 @@
 {% block title %}Gerenciar Posts - FS Eletromcz Admin{% endblock %}
 
 {% block content %}
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold">Gerenciar Posts do Blog</h1>
-        <a href="{{ url_for('main.new_blog_post') }}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded flex items-center">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold mb-4 md:mb-0">Gerenciar Posts do Blog</h1>
+        <a href="{{ url_for('main.new_blog_post') }}" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded flex items-center w-full md:w-auto justify-center">
             <i class="fas fa-plus mr-2"></i> Novo Post
         </a>
     </div>
 
     {% if posts %}
-        <div class="overflow-x-auto">
+        <!-- Versão para desktop -->
+        <div class="overflow-x-auto hidden md:block">
             <table class="w-full border-collapse table-auto">
                 <thead>
                     <tr class="bg-gray-100">
@@ -57,6 +58,43 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Versão para mobile -->
+        <div class="block md:hidden space-y-4">
+            {% for post in posts %}
+                <div class="border rounded-lg overflow-hidden bg-white shadow-sm">
+                    <div class="p-4 border-b">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-medium text-base">{{ post.title }}</h3>
+                                <div class="text-xs text-gray-500 mt-1">{{ post.slug }}</div>
+                            </div>
+                            <div>
+                                {% if post.published %}
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Publicado</span>
+                                {% else %}
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Rascunho</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-600 mt-2">
+                            {{ post.created_at.strftime('%d/%m/%Y') }} às {{ post.created_at.strftime('%H:%M') }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center divide-x bg-gray-50 py-2">
+                        <a href="{{ url_for('main.blog_post', slug=post.slug) }}" target="_blank" class="flex-1 text-center py-2 text-blue-600 hover:bg-gray-100" title="Visualizar">
+                            <i class="fas fa-eye mr-1"></i> Ver
+                        </a>
+                        <a href="{{ url_for('main.edit_blog_post', id=post.id) }}" class="flex-1 text-center py-2 text-green-600 hover:bg-gray-100" title="Editar">
+                            <i class="fas fa-edit mr-1"></i> Editar
+                        </a>
+                        <a href="#" onclick="confirmDeletePost({{ post.id }}, '{{ post.title|replace("'", "\\'") }}')" class="flex-1 text-center py-2 text-red-600 hover:bg-gray-100" title="Excluir">
+                            <i class="fas fa-trash mr-1"></i> Excluir
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% else %}
         <div class="bg-blue-50 p-6 rounded-md text-center">
             <p class="text-gray-700 mb-4">Nenhum post encontrado.</p>
@@ -67,15 +105,15 @@
     {% endif %}
 
     <!-- Modal de confirmação de exclusão -->
-    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 max-w-md mx-4">
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-auto">
             <h3 class="text-lg font-semibold mb-4">Confirmar exclusão</h3>
             <p class="mb-6">Tem certeza que deseja excluir o post "<span id="postTitle"></span>"? Esta ação não pode ser desfeita.</p>
-            <div class="flex justify-end space-x-4">
-                <button onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded transition">
+            <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
+                <button onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded transition w-full sm:w-auto">
                     Cancelar
                 </button>
-                <a id="confirmDeleteBtn" href="#" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded transition">
+                <a id="confirmDeleteBtn" href="#" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded transition text-center w-full sm:w-auto">
                     Excluir
                 </a>
             </div>
@@ -90,11 +128,25 @@
             document.getElementById('confirmDeleteBtn').href = "{{ url_for('main.delete_blog_post', id=0) }}".replace('0', id);
             document.getElementById('deleteModal').classList.remove('hidden');
             document.getElementById('deleteModal').classList.add('flex');
+            // Impedir rolagem do body quando o modal estiver aberto
+            document.body.style.overflow = 'hidden';
         }
         
         function closeDeleteModal() {
             document.getElementById('deleteModal').classList.remove('flex');
             document.getElementById('deleteModal').classList.add('hidden');
+            // Restaurar rolagem do body
+            document.body.style.overflow = '';
         }
+
+        // Fechar modal ao clicar fora dele
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('deleteModal');
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeDeleteModal();
+                }
+            });
+        });
     </script>
 {% endblock %}

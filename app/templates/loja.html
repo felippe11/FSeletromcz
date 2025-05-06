@@ -8,11 +8,16 @@
     background-size: cover;
     background-position: center;
 }
+@media (max-width: 640px) {
+    .hero-loja {
+        min-height: 60vh !important;
+    }
+}
 {% endblock %}
 
 {% block content %}
     <!-- Banner Section -->
-    <section class="hero-loja min-h-screen flex items-center justify-center text-white pt-16 sm:pt-20">
+    <section class="hero-loja min-h-[70vh] md:min-h-screen flex items-center justify-center text-white pt-16 sm:pt-20">
         <div class="container mx-auto px-4 text-center relative z-10">
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Nossa <span class="text-blue-300">Loja</span></h1>
             <p class="text-lg sm:text-xl max-w-2xl mx-auto">Encontre os melhores equipamentos e soluções para energia. Produtos de alta qualidade com a garantia FS Eletromcz.</p>
@@ -20,27 +25,27 @@
     </section>
 
     <!-- Products Section -->
-    <section class="py-16">
+    <section class="py-10 sm:py-16">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 
                 {% if products %}
                     {% for product in products %}
                         <!-- Produto: {{ product.name }} -->
                         <div class="product-card bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
-                            <div class="h-64 bg-gray-100 flex items-center justify-center">
-                                <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain">
+                            <div class="h-48 sm:h-64 bg-gray-100 flex items-center justify-center">
+                                <img src="{{ url_for('static', filename='img/products/' + product.image) }}" alt="{{ product.name }}" class="w-full h-full object-contain p-2">
                             </div>
-                            <div class="p-6 flex flex-col flex-grow">
+                            <div class="p-4 sm:p-6 flex flex-col flex-grow">
                                 <div class="flex-grow">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ product.name }}</h3>
-                                    <div class="flex items-center mb-4">
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">{{ product.name }}</h3>
+                                    <div class="flex items-center mb-3 sm:mb-4">
                                         <span class="text-blue-500 font-bold text-lg">{{ product.price|format_currency }}</span>
                                         {% if product.old_price %}
                                             <span class="text-gray-500 line-through ml-2">{{ product.old_price|format_currency }}</span>
                                         {% endif %}
                                     </div>
-                                    <p class="text-gray-600 mb-6">{{ product.description }}</p>
+                                    <p class="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">{{ product.description }}</p>
                                 </div>
                                 <a href="https://wa.me/5582988916657?text=Olá!%20Tenho%20interesse%20no%20{{ product.name|urlencode }}.%20Pode%20me%20dar%20mais%20informações?" target="_blank" rel="noopener noreferrer" class="w-full inline-block text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300 mt-auto">
                                     <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
@@ -49,7 +54,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="col-span-3 text-center py-16">
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-16">
                         <p class="text-gray-600 text-xl">Nenhum produto disponível no momento. Volte em breve!</p>
                     </div>
                 {% endif %}
@@ -59,11 +64,11 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 bg-gray-100">
+    <section class="py-10 sm:py-16 bg-gray-100">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Não encontrou o que procura?</h2>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Entre em contato conosco e solicite um orçamento personalizado. Temos diversas soluções para atender às suas necessidades específicas.</p>
-            <a href="https://wa.me/5582988916657?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20personalizado." target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">Não encontrou o que procura?</h2>
+            <p class="text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base">Entre em contato conosco e solicite um orçamento personalizado. Temos diversas soluções para atender às suas necessidades específicas.</p>
+            <a href="https://wa.me/5582988916657?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20personalizado." target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300">
                 <i class="fab fa-whatsapp mr-2"></i> Solicitar Orçamento
             </a>
         </div>

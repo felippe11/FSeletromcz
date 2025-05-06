@@ -12,52 +12,86 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scroll para links internos
     setupSmoothScroll();
     
-    // Fechar menu mobile ao clicar em um link
-    setupMobileMenuClose();
-    
     // Efeito parallax na seção CTA
     setupParallaxEffect();
 });
 
-// Configuração do menu mobile
+// Configuração do menu mobile - VERSÃO CORRIGIDA
 function setupMobileMenu() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMenuButton = document.getElementById('close-mobile-menu');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
     
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-            // Alterna o ícone do botão entre menu e fechar
-            const icon = this.querySelector('i');
-            if (icon) {
-                if (icon.classList.contains('fa-bars')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            }
+    // Verificações de debug
+    if (!mobileMenuButton) console.error('Botão do menu mobile não encontrado');
+    if (!closeMenuButton) console.error('Botão de fechar não encontrado');
+    if (!mobileMenu) console.error('Menu mobile não encontrado');
+    if (!mobileMenuOverlay) console.error('Overlay do menu não encontrado');
+    
+    // Só procede se todos os elementos existirem
+    if (mobileMenuButton && closeMenuButton && mobileMenu && mobileMenuOverlay) {
+        console.log('Elementos do menu mobile encontrados');
+        
+        // Função para abrir o menu com debug
+        function openMenu() {
+            console.log('Tentando abrir menu mobile');
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenuOverlay.classList.remove('hidden');
+            // Pequeno atraso para garantir que o DOM seja atualizado antes da animação
+            setTimeout(() => {
+                mobileMenuOverlay.classList.remove('opacity-0');
+            }, 10);
+            document.body.classList.add('overflow-hidden'); // Impede rolagem
+            console.log('Menu mobile deve estar aberto agora');
+        }
+        
+        // Função para fechar o menu com debug
+        function closeMenu() {
+            console.log('Tentando fechar menu mobile');
+            mobileMenu.classList.add('translate-x-full');
+            mobileMenuOverlay.classList.add('opacity-0');
+            // Aguarda a conclusão da animação antes de ocultar completamente
+            setTimeout(() => {
+                mobileMenuOverlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+            console.log('Menu mobile deve estar fechado agora');
+        }
+        
+        // Adiciona eventos de clique com log
+        mobileMenuButton.addEventListener('click', function(e) {
+            console.log('Botão menu mobile clicado');
+            e.preventDefault();
+            openMenu();
         });
-    }
-}
-
-// Fechar o menu mobile quando um link é clicado
-function setupMobileMenuClose() {
-    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    
-    if (mobileMenuLinks && mobileMenu && mobileMenuButton) {
-        mobileMenuLinks.forEach(link => {
+        
+        closeMenuButton.addEventListener('click', function(e) {
+            console.log('Botão fechar menu clicado');
+            e.preventDefault();
+            closeMenu();
+        });
+        
+        mobileMenuOverlay.addEventListener('click', function(e) {
+            console.log('Overlay clicado');
+            e.preventDefault();
+            closeMenu();
+        });
+        
+        // Fecha o menu ao clicar em links
+        mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuButton.querySelector('i');
-                if (icon && icon.classList.contains('fa-times')) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
+                console.log('Link do menu mobile clicado');
+                closeMenu();
             });
+        });
+        
+        // Fecha o menu se a janela for redimensionada para desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) { // 768px é o breakpoint md do Tailwind
+                closeMenu();
+            }
         });
     }
 }
