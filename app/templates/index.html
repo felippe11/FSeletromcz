@@ -128,12 +128,96 @@
             <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-2xl mx-auto slide-left" style="animation-delay: 0.5s;">Proteja seu negócio e seu lar com nossos estabilizadores, baterias e nobreaks. Oferecemos soluções completas para nobreak em maceió, para garantir que você não fique sem energia no momento mais crucial.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 slide-left" style="animation-delay: 0.8s;">
                 <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300">Fale Conosco</a>
-                <a href="#services" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300 mt-3 sm:mt-0">Nossos Serviços</a>
+                <a href="#featured-services" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300 mt-3 sm:mt-0">Nossos Serviços</a>
             </div>
         </div>
         <div class="lg:w-1/2 hidden lg:block fade-in">
         </div>
     </section>
+
+<section>
+    
+</section>
+
+<!-- Logos Carousel Section -->
+<section class="py-5 w-full overflow-hidden">
+    <div class="text-center mb-8 fade-in container mx-auto px-4">
+        <p class="text-gray-800">Trabalhamos com as melhores marcas do mercado</p>
+    </div>
+    
+    <div class="logos-carousel-container overflow-hidden relative w-full">
+        <div class="logos-carousel flex items-center animate-scroll">
+            <!-- Primeiro conjunto de logos -->
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-1.png') }}" alt="NHS" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-2.png') }}" alt="Engetron" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-3.png') }}" alt="Intelbras" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-4.png') }}" alt="CS Eletro" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-5.png') }}" alt="Delta" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-6.png') }}" alt="Lacerda" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-7.png') }}" alt="Kaise" class="h-20 w-auto object-contain">
+            </div>
+            
+            <!-- Duplicação dos logos para criar efeito infinito -->
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-1.png') }}" alt="NHS" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-2.png') }}" alt="Engetron" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-3.png') }}" alt="Intelbras" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-4.png') }}" alt="CS Eletro" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-5.png') }}" alt="Delta" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-6.png') }}" alt="Lacerda" class="h-20 w-auto object-contain">
+            </div>
+            <div class="logo-slide flex-shrink-0 mx-6">
+                <img src="{{ url_for('static', filename='img/logo-7.png') }}" alt="Kaise" class="h-20 w-auto object-contain">
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-14 * 1rem - 14 * 12px - 100%));
+            }
+        }
+        
+        .animate-scroll {
+            animation: scroll 30s linear infinite;
+        }
+        
+        .logos-carousel-container:hover .animate-scroll {
+            animation-play-state: paused;
+        }
+    </style>
+</section>
+
+<section>
+    
+</section>
 
 <!-- Featured Services Section -->
 <section id="featured-services" class="py-16 bg-white">
