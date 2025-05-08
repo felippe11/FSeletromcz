@@ -118,6 +118,99 @@
             margin-top: 0 !important; /* Remover margem superior completamente */
             transform: translateY(-25px); /* Puxar botão para cima */
         }
+
+        /* Estilização moderna para o FAQ */
+        .faq-card {
+            transform: translateZ(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+        }
+        
+        .faq-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: 0.5s;
+            opacity: 0;
+        }
+        
+        .faq-card:hover::before {
+            left: 100%;
+            opacity: 1;
+        }
+        
+        .active-faq-card {
+            box-shadow: 0 10px 25px rgba(66, 153, 225, 0.25);
+            backdrop-filter: blur(12px);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .faq-arrow-icon {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .faq-answer.closing {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+        }
+        
+        .icon-hover {
+            transform: scale(1.1);
+            background: rgba(66, 153, 225, 0.2);
+        }
+        
+        .pulse-once {
+            animation: pulse-animation 0.5s ease-out;
+        }
+        
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
 {% endblock %}
 
 {% block content %}
@@ -540,6 +633,277 @@
         </div>
     </section>
 
+    <section>
+
+        
+    </section>
+
+    <!-- FAQ Section com design moderno -->
+    <section id="faq" class="py-16 relative">
+        <!-- Formas decorativas de fundo -->
+        <div class="absolute inset-0 overflow-hidden z-0">
+            <div class="absolute w-64 h-64 rounded-full bg-blue-300 opacity-20 -top-20 -left-20 blur-3xl"></div>
+            <div class="absolute w-96 h-96 rounded-full bg-blue-200 opacity-20 -bottom-40 -right-20 blur-3xl"></div>
+            <div class="absolute w-40 h-40 rounded-full bg-white opacity-10 top-1/3 left-1/4 blur-2xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">Perguntas <span class="text-blue-500">Frequentes</span></h2>
+                <p class="text-black max-w-2xl mx-auto">Encontre respostas para as dúvidas mais comuns sobre nossos serviços.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-6 max-w-6xl mx-auto">
+                
+                <!-- Accordion 1 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.1s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Para quais situações é indicado o aluguel de geradores?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">O aluguel de geradores é ideal para eventos, obras, empresas e emergências em que há necessidade de energia temporária ou suporte durante quedas de energia.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 2 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.2s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Vocês oferecem suporte técnico durante o período de aluguel?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Sim, oferecemos suporte técnico completo para garantir o funcionamento ideal do gerador durante o período de aluguel.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 3 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.3s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Quais tipos de geradores estão disponíveis?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Dispomos de geradores de diferentes potências e tamanhos para atender a diversas demandas, desde pequenos eventos até grandes instalações industriais.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 4 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.4s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-battery-half"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Como sei qual bateria é compatível com meu nobreak?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Nossa equipe pode ajudá-lo a identificar a bateria ideal com base na marca, modelo e especificações técnicas do seu nobreak.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 5 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.5s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Vocês oferecem instalação de baterias?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Sim, realizamos a instalação para garantir que seu nobreak funcione corretamente e com máxima eficiência.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 6 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.6s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-hourglass-half"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Qual é a vida útil de uma bateria para nobreak?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">A vida útil pode variar, mas geralmente dura de 2 a 5 anos, dependendo do uso e das condições de manutenção.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 7 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.7s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Com que frequência devo realizar a manutenção do meu nobreak?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Recomendamos uma manutenção preventiva a cada 6 meses ou conforme indicado pelo fabricante.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 8 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.8s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">O que está incluído na manutenção preventiva?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">A manutenção inclui inspeção geral, teste de baterias, limpeza interna, verificação de conexões e ajustes necessários para garantir o funcionamento ideal do nobreak.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 9 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 0.9s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Vocês atendem emergências para nobreaks com falhas?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Sim, oferecemos atendimento emergencial para resolver problemas inesperados com seu nobreak.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 10 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 1.0s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Quais marcas de nobreak vocês consertam?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Trabalhamos com as principais marcas do mercado. Consulte-nos para verificar a compatibilidade com o seu modelo.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 11 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 1.1s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Quanto tempo leva para consertar um nobreak?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">O prazo depende do problema identificado, mas oferecemos diagnóstico rápido e informamos o tempo estimado após a análise inicial.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion 12 -->
+                <div class="faq-card backdrop-blur-sm bg-white/10 rounded-xl overflow-hidden border border-white/20 shadow-lg transition-all duration-300 hover:shadow-blue-300/30 fade-in slide-up" style="animation-delay: 1.2s;">
+                    <div class="faq-item">
+                        <button class="faq-question w-full px-6 py-4 text-left focus:outline-none transition duration-300">
+                            <div class="flex items-center">
+                                <div class="faq-icon mr-4 text-blue-500">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3 class="text-sm md:text-base font-medium text-black flex-grow">Vocês oferecem garantia para os consertos realizados?</h3>
+                                <div class="faq-arrow-icon text-blue-500 transition-transform duration-500 ml-3">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="faq-answer px-6 py-4 hidden">
+                            <p class="text-black text-sm pl-8">Sim, garantimos os serviços realizados e peças utilizadas no conserto.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    
+    <style>
+
+    </style>
+
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-6">
@@ -549,7 +913,7 @@
             </div>
             
             <div class="flex flex-col lg:flex-row gap-12">
-                <div class="lg:w-1/2 fade-in">
+                <div class="lg:w-1/2 slide-left fade-in" style="animation-delay: 0.2s;">
                     <form action="/enviar_contato" method="POST" class="bg-gray-50 rounded-xl p-8 shadow-md">
                         <div class="mb-6">
                             <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
@@ -581,7 +945,7 @@
                     </form>
                 </div>
                 
-                <div class="lg:w-1/2 fade-in" style="animation-delay: 0.3s;">
+                <div class="lg:w-1/2 slide-right fade-in" style="animation-delay: 0.8s;">
                     <div class="bg-gray-50 rounded-xl p-8 shadow-md h-full">
                         <h3 class="text-2xl font-bold text-gray-800 mb-6">Nossos <span class="text-blue-500">Contatos</span></h3>
                         
@@ -651,7 +1015,8 @@
         </div>
     </section>
 
-
+<!-- perguntas frequentes JS -->
+<script src="static/js/faq.js"></script>
 
 <script src="static/js/animacao-control.js"></script>
 <!-- Swiper JS -->
