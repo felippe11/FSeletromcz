@@ -31,6 +31,11 @@ reviews_cache = {
 
 main = Blueprint('main', __name__)
 
+# Adiciona o ano atual a todos os templates
+@main.app_context_processor
+def inject_current_year():
+    return {'current_year': datetime.now().year}
+
 # Filtro personalizado para formatar preços
 @main.app_template_filter('format_currency')
 def format_currency(value):
