@@ -76,7 +76,7 @@
             
             <div class="mb-4">
                 {{ form.title.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-                {{ form.title(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Título do post") }}
+                {{ form.title(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="Título do post", autocomplete="off") }}
                 {% if form.title.errors %}
                     <div class="text-red-500 text-xs mt-1">
                         {% for error in form.title.errors %}
@@ -89,7 +89,7 @@
             <div class="mb-4">
                 {{ form.slug.label(class="block text-gray-700 text-sm font-bold mb-2") }}
                 <div class="flex flex-col sm:flex-row">
-                    {{ form.slug(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="url-amigavel-do-post") }}
+                    {{ form.slug(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder="url-amigavel-do-post", autocomplete="off") }}
                     <button type="button" id="generate-slug" class="mt-2 sm:mt-0 sm:ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded">
                         <i class="fas fa-sync-alt mr-1"></i> Gerar
                     </button>
@@ -106,7 +106,7 @@
             
             <div class="mb-4">
                 {{ form.summary.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-                {{ form.summary(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="3", placeholder="Um breve resumo do post") }}
+                {{ form.summary(class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="3", placeholder="Um breve resumo do post", autocomplete="off") }}
                 <p class="text-gray-500 text-xs mt-1">Máximo 300 caracteres. Utilizado na listagem e compartilhamento.</p>
                 {% if form.summary.errors %}
                     <div class="text-red-500 text-xs mt-1">
@@ -120,7 +120,7 @@
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Conteúdo</label>
                 <!-- Campo oculto que será enviado no formulário -->
-                <input type="hidden" name="content" id="content-hidden">
+                <input type="hidden" name="content" id="content-hidden" autocomplete="off">
                 <!-- Campo para o CKEditor -->
                 <div id="editor" class="w-full">{{ form.content.data|safe if form.content.data else '' }}</div>
                 {% if form.content.errors %}
@@ -149,7 +149,7 @@
                             <img id="image-preview" src="#" class="preview-image mx-auto hidden" alt="Preview">
                         {% endif %}
                     </label>
-                    {{ form.featured_image(class="hidden", id="featured_image") }}
+                    {{ form.featured_image(class="hidden", id="featured_image", autocomplete="off") }}
                 </div>
                 <p class="text-gray-500 text-xs mt-1">Imagem destacada do post. Formatos: jpg, jpeg, png.</p>
                 {% if form.featured_image.errors %}

@@ -55,13 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Toggle do menu mobile
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+    // Removido código duplicado do menu mobile que estava causando conflito
     
     // Botão Whatsapp continua com animação constante
     const whatsappButton = document.querySelector('.fixed.bottom-6.right-6');

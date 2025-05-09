@@ -1,0 +1,20 @@
+{
+  "name": "fs_eletromcz_web",
+  "version": "1.0.0",
+  "description": "Este projeto é uma aplicação web desenvolvida com Flask, destinada a fornecer informações e serviços relacionados à FS Eletromcz, uma empresa de soluções elétricas profissionais.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.5"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.5"
+  }
+}
