@@ -18,7 +18,7 @@
         /* Media query para dispositivos móveis */
         @media (max-width: 768px) {
             .hero {
-                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/hero_mobile2.png') }}');
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/hero_mobile.png') }}');
                 background-size: cover;
                 background-position: center;
                 max-width: 100vw;
@@ -252,15 +252,13 @@
 {% block content %}
     <!-- Hero Section -->
     <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16 sm:pt-20">
-        <div class="lg:w-1/2 container mx-auto px-4 sm:px-6 text-center fade-in">
+        <div class="container mx-auto px-4 sm:px-6 text-center fade-in">
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 slide-left">Soluções Elétricas <span class="text-blue-500">Profissionais</span></h1>
             <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-2xl mx-auto slide-left" style="animation-delay: 0.5s;">Proteja seu negócio e seu lar com nossos estabilizadores, baterias e nobreaks. Oferecemos soluções completas para nobreak em maceió, para garantir que você não fique sem energia no momento mais crucial.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 slide-left" style="animation-delay: 0.8s;">
                 <a href="#contact" class="bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300">Fale Conosco</a>
                 <a href="#featured-services" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-6 sm:px-8 py-3 rounded-full text-base sm:text-lg font-medium transition duration-300 mt-3 sm:mt-0">Nossos Serviços</a>
             </div>
-        </div>
-        <div class="lg:w-1/2 hidden lg:block fade-in">
         </div>
     </section>
 
@@ -342,10 +340,6 @@
             animation-play-state: paused;
         }
     </style>
-</section>
-
-<section>
-    
 </section>
 
 <!-- Featured Services Section -->
@@ -561,7 +555,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/stats-bg.jpg') }}');">
+    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ url_for('static', filename='img/stats-bg.jpg') }}');">
         <div class="container mx-auto px-6 py-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 
@@ -682,7 +676,160 @@
             </div>
         </div>
     </div>
-</section>
+</section>    
+
+<!-- Alguns Cases da FS Eletro Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="mx-auto w-full">
+            <div class="text-center mb-10 fade-in">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">Alguns Cases da<span class="text-blue-500"> FS Eletro</span></h2>
+            </div>
+
+            <!-- Primeira linha de logos - sentido esquerda -->
+            <div class="logos-carousel-container overflow-hidden relative w-full mb-8">
+                <div class="logos-carousel flex items-center animate-scroll-left">
+                    <!-- Primeiro conjunto de logos de cases -->
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-1.png') }}" alt="case 1" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-2.png') }}" alt="case 2" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-3.png') }}" alt="case 3" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-4.png') }}" alt="case 4" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-5.png') }}" alt="case 5" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-6.png') }}" alt="case 6" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-7.png') }}" alt="case 7" class="h-16 w-auto object-contain">
+                    </div>
+                    
+                    <!-- Duplicação dos logos para criar efeito infinito -->
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-1.png') }}" alt="case 1" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-2.png') }}" alt="case 2" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-3.png') }}" alt="case 3" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-4.png') }}" alt="case 4" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-5.png') }}" alt="case 5" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-6.png') }}" alt="case 6" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-7.png') }}" alt="case 7" class="h-16 w-auto object-contain">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda linha de logos - sentido direita (ordem invertida) -->
+            <div class="logos-carousel-container overflow-hidden relative w-full">
+                <div class="logos-carousel flex items-center animate-scroll-right">
+                    <!-- Primeiro conjunto de logos de cases em ordem invertida -->
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-14.png') }}" alt="case 14" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-13.png') }}" alt="case 13" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-12.png') }}" alt="case 12" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-11.png') }}" alt="case 11" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-10.png') }}" alt="case 10" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-9.png') }}" alt="case 9" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-8.png') }}" alt="case 8" class="h-16 w-auto object-contain">
+                    </div>
+
+                    <!-- Duplicação dos logos para criar efeito infinito -->
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-14.png') }}" alt="case 14" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-13.png') }}" alt="case 13" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-12.png') }}" alt="case 12" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-11.png') }}" alt="case 11" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-10.png') }}" alt="case 10" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-9.png') }}" alt="case 9" class="h-16 w-auto object-contain">
+                    </div>
+                    <div class="case-slide flex-shrink-0 mx-6">
+                            <img src="{{ url_for('static', filename='img/cases/case-8.png') }}" alt="case 8" class="h-16 w-auto object-contain">
+                    </div>
+                </div>
+            </div>
+              <style>
+                @keyframes scroll-left {
+                    0% {
+                        transform: translateX(0);
+                    }
+                    100% {
+                        transform: translateX(calc(-14 * 1rem - 14 * 12px - 100%));
+                    }
+                }
+
+                @keyframes scroll-right {
+                    0% {
+                        transform: translateX(calc(0 * 1rem - 0 * 12px - 100%));
+                    }
+                    100% {
+                        transform: translateX(0);
+                    }
+                }
+
+    
+                
+                .animate-scroll-left {
+                    animation: scroll-left 35s linear infinite;
+                }
+
+                .animate-scroll-right {
+                    animation: scroll-right 35s linear infinite;
+                }
+                
+                .logos-carousel-container:hover .animate-scroll-left,
+                .logos-carousel-container:hover .animate-scroll-right {
+                    animation-play-state: paused;
+                }
+                
+                .case-slide {
+                    transition: transform 0.3s ease;
+                }
+                
+                .case-slide:hover {
+                    transform: scale(1.05);
+                }
+            </style>
+        </div>
+    </section>
 
 <!-- Testimonials Section -->
 <section class="py-20 bg-white">
@@ -736,7 +883,7 @@
 </section>
 
     <!-- CTA Section -->
-    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/bg-cta.jpg') }}');">
+    <section class="py-16 text-white bg-cover bg-center bg-fixed bg-parallax" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ url_for('static', filename='img/bg-cta.jpg') }}');">
         <div class="container mx-auto px-6 text-center fade-in">
             <div class="max-w-3xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">Precisa de um eletricista <span class="text-blue-500">confiável</span>?</h2>
@@ -751,12 +898,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section>
-
-        
-    </section>
+    </section>    
 
     <!-- FAQ Section com design moderno -->
     <section id="faq" class="py-16 relative">
