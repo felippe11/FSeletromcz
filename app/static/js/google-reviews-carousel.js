@@ -26,8 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         testimonialsCarousel.classList.remove('hidden');
         
         // Inicializar o Swiper com efeito 3D
-        const swiper = new Swiper('#testimonials-carousel', {
-            effect: 'coverflow',
+        const swiper = new Swiper('#testimonials-carousel', {        effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: 'auto',
@@ -36,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 delay: 5000,
                 disableOnInteraction: false,
             },
+            touchEventsTarget: 'container',
+            touchRatio: 1,
+            touchAngle: 45,
+            simulateTouch: true,
             coverflowEffect: {
                 rotate: 5,
                 stretch: 0,
@@ -51,11 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-            breakpoints: {
-                // mobile
+            breakpoints: {            // mobile - navegação por toque/swipe
                 320: {
                     slidesPerView: 1,
-                    spaceBetween: 20
+                    spaceBetween: 20,
+                    navigation: {
+                        enabled: false
+                    },
+                    allowTouchMove: true
                 },
                 // tablet
                 640: {

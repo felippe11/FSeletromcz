@@ -11,6 +11,8 @@
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/hero.jpg') }}');
             background-size: cover;
             background-position: center;
+            max-width: 100%;
+            overflow-x: hidden;
         }
         
         /* Media query para dispositivos móveis */
@@ -19,6 +21,15 @@
                 background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='img/hero_mobile2.png') }}');
                 background-size: cover;
                 background-position: center;
+                max-width: 100vw;
+                width: 100%;
+            }
+            
+            /* Corrige o problema de overflow na página index no mobile */
+            html, body {
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
             }
         }
         
@@ -99,9 +110,7 @@
             min-height: 400px;    
             overflow: visible;    
             margin-bottom: 0;     /* Removida a margem inferior */
-        }
-
-        .swiper-button-prev, .swiper-button-next {
+        }        .swiper-button-prev, .swiper-button-next {
             width: 40px;
             height: 40px;
             display: flex;
@@ -111,6 +120,13 @@
 
         .swiper-button-prev:after, .swiper-button-next:after {
             display: none;
+        }
+        
+        /* Oculta botões de navegação em dispositivos móveis */
+        @media (max-width: 768px) {
+            .swiper-button-prev, .swiper-button-next {
+                display: none !important;
+            }
         }
 
         /* Estilo para o botão ver mais avaliações */
@@ -205,12 +221,32 @@
         .pulse-once {
             animation: pulse-animation 0.5s ease-out;
         }
-        
-        @keyframes pulse-animation {
+          @keyframes pulse-animation {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
+
+        /* Estilização do indicador de swipe para mobile */
+        .swipe-indicator {
+            opacity: 0.7;
+            animation: fade-in-out 2s ease-in-out infinite;
+            padding: 2px 0;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fade-in-out {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+{% endblock %}
+
+{% block head %}
+    <!-- Script para indicador de swipe em dispositivos móveis -->
+    <script src="{{ url_for('static', filename='js/swipe-indicator.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -583,15 +619,17 @@
                 </div>
                 <p class="text-gray-600">Carregando depoimentos reais do Google Reviews...</p>
             </div>
-            
-            <!-- Carrossel de depoimentos - inicialmente vazio -->
+              <!-- Carrossel de depoimentos - inicialmente vazio -->
             <div id="testimonials-carousel" class="swiper hidden">
+                <!-- Indicador de swipe para mobile -->
+                <div class="swipe-indicator md:hidden text-center text-sm text-gray-500 mb-2">
+                    <i class="fas fa-chevron-left mr-1"></i> Arraste para navegar <i class="fas fa-chevron-right ml-1"></i>
+                </div>
                 <div class="swiper-wrapper">
                     <!-- Slides serão inseridos aqui via JavaScript -->
                 </div>
-                
-                <!-- Controles de navegação -->
-                <div class="absolute z-10 left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between px-3 md:px-10">
+                  <!-- Controles de navegação - ocultos em mobile -->
+                <div class="absolute z-10 left-0 right-0 top-1/2 -translate-y-1/2 hidden md:flex justify-between px-3 md:px-10">
                     <button class="swiper-button-prev shadow-md p-3 rounded-full bg-white text-blue-500 hover:bg-blue-50 transition-all focus:outline-none">
                         <i class="fas fa-chevron-left"></i>
                     </button>

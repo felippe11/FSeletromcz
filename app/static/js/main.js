@@ -1,5 +1,10 @@
 // Função para verificar quando o usuário rola a página
 document.addEventListener('DOMContentLoaded', function() {
+    // Garante que a largura da página seja ajustada corretamente no mobile
+    document.documentElement.style.width = '100%';
+    document.body.style.width = '100%';
+    document.body.style.overflowX = 'hidden';
+    
     // Configuração do menu mobile
     setupMobileMenu();
     
@@ -14,6 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Efeito parallax na seção CTA
     setupParallaxEffect();
+    
+    // Forçar recálculo de layout no carregamento para evitar overflow no index
+    setTimeout(function() {
+        window.dispatchEvent(new Event('resize'));
+    }, 100);
 });
 
 // Configuração do menu mobile - VERSÃO CORRIGIDA
