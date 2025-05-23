@@ -459,7 +459,7 @@ def enviar_contato():
         """
         
         # Configurar destinatário do e-mail a partir de variável de ambiente ou usar padrão
-        destinatario = os.environ.get('EMAIL_DESTINATARIO', 'andrefelippe10@gmail.com')
+        destinatario = os.environ.get('EMAIL_DESTINATARIO', 'comercial@fseletromcz.com')
         
         msg = Message(
             subject=assunto,
