@@ -439,6 +439,35 @@ def create_fallback_reviews():
 @main.route('/enviar_contato', methods=['POST'])
 def enviar_contato():
     try:
+        # Verificar o reCAPTCHA v3
+        recaptcha_response = request.form.get('g-recaptcha-response')
+        if not recaptcha_response:
+            flash('Erro na verificação de segurança. Por favor, tente novamente.', 'error')
+            return redirect(url_for('main.home'))
+        
+        # Validar o reCAPTCHA v3 com o Google
+        secret_key = os.environ.get('RECAPTCHA_SECRET_KEY', '6LeYwk0rAAAAABZPGYQOhOzow2DD1BuzxhjZR0q_')
+        verify_response = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data={
+                'secret': secret_key,
+                'response': recaptcha_response
+            }
+        )
+        recaptcha_result = verify_response.json()
+        
+        # Verificar o resultado e o score (v3 retorna um score de 0.0 a 1.0)
+        if not recaptcha_result.get('success', False):
+            flash('Falha na verificação de segurança. Por favor, tente novamente.', 'error')
+            return redirect(url_for('main.home'))
+        
+        # Verificar score - 0.5 é um valor médio, você pode ajustar conforme necessidade
+        score = recaptcha_result.get('score', 0)
+        if score < 0.5:
+            logging.warning(f"Possível spam detectado no formulário de contato. Score: {score}")
+            flash('Nossa verificação de segurança detectou atividade suspeita. Por favor, tente novamente.', 'error')
+            return redirect(url_for('main.home'))
+        
         # Obter dados do formulário
         nome = request.form.get('name')
         email = request.form.get('email')

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}FS Eletromcz - Soluções Elétricas Profissionais{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <!-- favicon -->
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon/favicon.svg') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}" sizes="96x96" />    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon/favicon.svg') }}" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}" />
     <link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}" />
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeYwk0rAAAAABabDvT2fDJmy4xo8SqSEkNGxnh9"></script>
     
     <!-- Correção para problemas de overflow no mobile -->
     <script src="{{ url_for('static', filename='js/fix-mobile-overflow.js') }}"></script>
