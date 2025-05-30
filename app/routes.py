@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from flask_mail import Message
 from . import mail
 from .models import db, User, Product, BlogPost
-from .forms import LoginForm, ProductForm, BlogPostForm
+from .forms import LoginForm, ProductForm, BlogPostForm, ProfileForm
 import os
 import requests
 import json
@@ -866,3 +866,78 @@ def delete_blog_post(id):
         flash(f'Erro ao excluir post: {str(e)}', 'error')
     
     return redirect(url_for('main.admin_blog_posts'))
+
+@main.route('/admin/profile', methods=['GET', 'POST'])
+@admin_required
+def admin_profile():
+    form = ProfileForm()
+    
+    # Preencher o campo de usuário com o valor atual
+    if request.method == 'GET':
+        form.username.data = current_user.username
+    
+    if form.validate_on_submit():
+        # Verificar se a senha atual está correta
+        if not current_user.check_password(form.current_password.data):
+            flash('Senha atual incorreta', 'error')
+            # Logar tentativa de alteração com senha incorreta para segurança
+            logging.warning(f"Tentativa de alteração de perfil com senha incorreta para o usuário: {current_user.username}")
+            return render_template('admin/profile.html', 
+                                  form=form,
+                                  active_page='profile')
+        
+        try:
+            # Verificar se o nome de usuário está sendo alterado
+            if form.username.data != current_user.username:
+                # Verificar se o novo nome de usuário já existe
+                if User.query.filter(User.username == form.username.data, User.id != current_user.id).first():
+                    flash('Este nome de usuário já está em uso', 'error')
+                    return render_template('admin/profile.html', 
+                                        form=form,
+                                        active_page='profile')
+                
+                # Atualizar o nome de usuário
+                current_user.username = form.username.data
+              # Atualizar a senha se uma nova foi fornecida
+            if form.new_password.data:
+                if form.new_password.data != form.confirm_password.data:
+                    flash('As senhas não coincidem', 'error')
+                    return render_template('admin/profile.html', 
+                                        form=form,
+                                        active_page='profile')
+                
+                # Verificar requisitos mínimos de segurança
+                if len(form.new_password.data) < 6:
+                    flash('A senha deve ter pelo menos 6 caracteres', 'error')
+                    return render_template('admin/profile.html', 
+                                        form=form,
+                                        active_page='profile')
+                
+                # Verificar se a nova senha é igual à senha atual (para evitar trocas desnecessárias)
+                if current_user.check_password(form.new_password.data):
+                    flash('A nova senha não pode ser igual à senha atual', 'error')
+                    return render_template('admin/profile.html', 
+                                        form=form,
+                                        active_page='profile')
+                
+                current_user.set_password(form.new_password.data)
+                logging.info(f"Senha alterada com sucesso para o usuário: {current_user.username}")
+            
+            # Salvar as alterações no banco de dados
+            db.session.commit()
+            
+            flash('Perfil atualizado com sucesso!', 'success')
+            return redirect(url_for('main.admin_profile'))
+            
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Erro ao atualizar perfil: {str(e)}', 'error')
+    
+    # Se houver erros de validação no formulário
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(f'Erro no campo {getattr(form, field).label.text}: {error}', 'error')
+    
+    return render_template('admin/profile.html', 
+                          form=form,
+                          active_page='profile')

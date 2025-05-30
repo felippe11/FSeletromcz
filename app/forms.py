@@ -23,6 +23,23 @@ class LoginForm(FlaskForm):
     password = PasswordField('Senha', validators=[DataRequired()])
     submit = SubmitField('Entrar')
 
+class ProfileForm(FlaskForm):
+    username = StringField('Nome de usuário', validators=[
+        DataRequired(), 
+        Length(min=3, max=64),
+        # Garantir que só tenha caracteres alfanuméricos e underscores
+        # Regex para permitir letras, números e underscores
+        # Regexp('^[A-Za-z0-9_]+$', message="Nome de usuário deve conter apenas letras, números e _")
+    ])
+    current_password = PasswordField('Senha atual', validators=[DataRequired()])
+    new_password = PasswordField('Nova senha', validators=[Optional(), Length(min=6, message="A nova senha deve ter pelo menos 6 caracteres")])
+    confirm_password = PasswordField('Confirmar nova senha', validators=[Optional()])
+    submit = SubmitField('Salvar alterações')
+    
+    def validate_confirm_password(self, field):
+        if self.new_password.data and self.new_password.data != field.data:
+            raise ValueError('As senhas não coincidem')
+
 class ProductForm(FlaskForm):
     name = StringField('Nome do Produto', validators=[DataRequired(), Length(min=2, max=100)])
     description = TextAreaField('Descrição', validators=[DataRequired()])
