@@ -17,7 +17,7 @@ class Config:
     MAIL_DEFAULT_SENDER = ('FS Eletromcz', os.getenv('MAIL_USERNAME'))
     
     # Configurações do banco de dados
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'sqlite:///fs_eletromcz.db'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'sqlite:///'+os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app', 'static', 'img', 'products', 'fs_eletromcz.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Pasta para upload de imagens de produtos
