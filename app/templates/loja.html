@@ -50,11 +50,13 @@
     background-color: white;
     width: 90%;
     max-width: 600px;
+    max-height: 85vh; /* Limita a altura máxima a 85% da altura da viewport */
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     transform: scale(0.8);
     opacity: 0;
     transition: transform 0.4s ease, opacity 0.4s ease;
+    overflow-y: auto; /* Adiciona barra de rolagem vertical quando necessário */
 }
 
 .modal-overlay.active .modal-container {
@@ -129,9 +131,7 @@
 
             </div>
         </div>
-    </section>
-
-    <!-- Modal de Detalhes do Produto -->
+    </section>    <!-- Modal de Detalhes do Produto -->
     <div id="productModal" class="modal-overlay">
         <div class="modal-container relative p-6">
             <span class="modal-close-btn">&times;</span>
@@ -146,10 +146,12 @@
                             <span id="modalProductPrice" class="text-blue-500 font-bold text-xl"></span>
                             <span id="modalProductOldPrice" class="text-gray-500 line-through ml-2 hidden"></span>
                         </div>
-                        <p id="modalProductDescription" class="text-gray-600 text-sm sm:text-base mb-6"></p>
+                        <div class="overflow-y-auto max-h-[200px] md:max-h-none">
+                            <p id="modalProductDescription" class="text-gray-600 text-sm sm:text-base mb-6"></p>
+                        </div>
                         <button 
                             id="modalProductWhatsappBtn" 
-                            class="w-full text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300"
+                            class="w-full text-center bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition duration-300 mt-4"
                         >
                             <i class="fab fa-whatsapp mr-2"></i> Comprar pelo WhatsApp
                         </button>
