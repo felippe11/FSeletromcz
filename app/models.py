@@ -8,7 +8,8 @@ db = SQLAlchemy()
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128))
+    # O hash scrypt padrao do Werkzeug 3 ultrapassa 128 caracteres.
+    password_hash = db.Column(db.String(255))
     is_admin = db.Column(db.Boolean, default=False)
 
     def set_password(self, password):
@@ -41,7 +42,7 @@ class BlogPost(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     published = db.Column(db.Boolean, default=True)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), index=True)
     author = db.relationship('User', backref='blog_posts')
     
     def __repr__(self):

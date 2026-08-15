@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, abort, request
 from flask_mail import Mail
 from flask_login import LoginManager
 from config import Config
@@ -17,6 +17,16 @@ def load_user(user_id):
 
 def create_app(config_class=Config):
     app = Flask(__name__, static_folder='static')
+
+    @app.before_request
+    def block_database_downloads():
+        static_prefix = f'{app.static_url_path}/'
+        database_extensions = ('.db', '.sqlite', '.sqlite3')
+        if (
+            request.path.startswith(static_prefix)
+            and request.path.lower().endswith(database_extensions)
+        ):
+            abort(404)
     
     # Configurações da aplicação
     app.config.from_object(config_class)
